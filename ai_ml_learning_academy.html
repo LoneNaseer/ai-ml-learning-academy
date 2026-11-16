@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>AI/ML Learning Academy | Your Personal Path to AI Mastery</title>
+<meta name='description' content='Personal AI/ML Learning Academy - Python, Math, ML, Deep Learning, GenAI path with progress tracking, AI tutor, and confidence-building design.'>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --secondary: #f59e0b;
+    --accent: #ec4899;
+    --success: #10b981;
+    --bg-gradient-start: #0f0f1a;
+    --bg-gradient-mid: #1e1e3a;
+    --bg-gradient-end: #2d1b3d;
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --warning: #fbbf24;
+    --danger: #ef4444;
+    --info: #06b6d4;
+  }
+  body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, rgba(99,102,241,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(245,158,11,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .page { display: none; min-height: 100vh; padding: 20px; animation: fadeIn 0.5s ease-out; position: relative; z-index: 1; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: none;} }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: none;} }
+  @keyframes pulse { 0%, 100% { transform: scale(1);} 50% { transform: scale(1.02);} }
+  @keyframes shimmer { 0% { background-position: -200% 0;} 100% { background-position: 200% 0;} }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg);} 25% { transform: translateY(-30px) rotate(5deg);} 50% { transform: translateY(20px) rotate(-3deg);} 75% { transform: translateY(-15px) rotate(2deg);} }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+  @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3);} 50% { transform: scale(1.05);} 70% { transform: scale(0.9);} 100% { opacity: 1; transform: scale(1);} }
+  h1, h2, h3, h4 { line-height: 1.3; font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+  
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 20px 0;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+    animation: slideUp 0.6s ease-out backwards;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    background-size: 200% 100%; animation: shimmer 3s linear infinite;
+  }
+  
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px; border: none; cursor: pointer;
+    font-size: 15px; font-weight: 600; font-family: inherit; color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    margin: 8px 6px; transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(99,102,241,0.4); position: relative; overflow: hidden;
+  }
+  .btn::before { content: ''; position: absolute; top: 0; left: -100%; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease; }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(99,102,241,0.5); }
+  .btn:hover::before { left: 100%; }
+  .btn:active { transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--secondary); border: 2px solid var(--secondary); box-shadow: 0 4px 16px rgba(245,158,11,0.2); }
+  .btn.ghost:hover { background: var(--secondary); color: var(--bg-gradient-start); box-shadow: 0 8px 24px rgba(245,158,11,0.4); }
+  .btn.accent { background: linear-gradient(135deg, var(--accent), #f43f5e); box-shadow: 0 4px 16px rgba(236,72,153,0.4); }
+  .btn.accent:hover { box-shadow: 0 8px 24px rgba(236,72,153,0.5); }
+  .btn.success { background: linear-gradient(135deg, var(--success), #34d399); box-shadow: 0 4px 16px rgba(16,185,129,0.4); }
+  .btn.small { padding: 10px 20px; font-size: 13px; }
+  .btn.info { background: linear-gradient(135deg, var(--info), #22d3ee); box-shadow: 0 4px 16px rgba(6,182,212,0.4); }
+  
+  .urdu { font-family: 'Noto Nastaliq Urdu', 'Jameel Noori', serif; direction: rtl; font-size: 1.25em; line-height: 2.2; }
+  .urdu-sm { font-family: 'Noto Nastaliq Urdu', 'Jameel Noori', serif; direction: rtl; font-size: 1.1em; line-height: 2; }
+  .code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: rgba(99,102,241,0.2); padding: 2px 8px; border-radius: 6px; color: var(--secondary); }
+  
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,15,26,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(99,102,241,0.2);
+    padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin: -20px -20px 20px -20px;
+  }
+  .nav button { background: transparent; color: var(--text-secondary); border: none; padding: 10px 20px;
+    border-radius: 50px; cursor: pointer; font-size: 14px; font-weight: 500; font-family: inherit;
+    transition: all 0.3s ease; position: relative; }
+  .nav button::after { content: ''; position: absolute; bottom: 8px; left: 50%; width: 0; height: 3px;
+    background: var(--secondary); border-radius: 2px; transition: all 0.3s ease; transform: translateX(-50%); }
+  .nav button:hover { color: var(--secondary); }
+  .nav button.active { color: var(--secondary); background: rgba(99,102,241,0.1); }
+  .nav button.active::after { width: 60%; }
+  
+  .progress-wrap { background: rgba(255,255,255,0.1); border-radius: 50px; height: 28px; overflow: hidden; position: relative; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    background-size: 200% 100%; animation: shimmer 2s linear infinite; width: 0%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center; color: var(--bg-gradient-start); font-size: 13px; font-weight: 700; line-height: 28px; border-radius: 50px; }
+  
+  .lock { opacity: 0.6; filter: grayscale(0.5); pointer-events: none; }
+  
+  .badge { display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.2));
+    border: 1px solid rgba(99,102,241,0.3); color: var(--primary-light); padding: 6px 16px;
+    border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 16px; backdrop-filter: blur(10px); }
+  
+  .example-box { background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.05));
+    border-right: 4px solid var(--success); padding: 16px; border-radius: 12px; margin: 12px 0; border-left: 1px solid rgba(16,185,129,0.2); }
+  .resource-box { background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(236,72,153,0.08));
+    border-right: 4px solid var(--primary); padding: 18px; border-radius: 14px; margin: 14px 0; border-left: 1px solid rgba(99,102,241,0.3); position: relative; }
+  .resource-box::before { content: '📚'; position: absolute; top: -12px; right: 20px;
+    background: var(--primary); color: #fff; width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+  .practice-box { background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(236,72,153,0.08));
+    border-right: 4px solid var(--secondary); padding: 18px; border-radius: 14px; margin: 16px 0; border-left: 1px solid rgba(245,158,11,0.3); }
+  .confidence-box { background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(99,102,241,0.08));
+    border-right: 4px solid var(--info); padding: 18px; border-radius: 14px; margin: 16px 0; border-left: 1px solid rgba(6,182,212,0.3); }
+  
+  .quiz-opt { display: block; width: 100%; text-align: left; padding: 14px 18px; margin: 10px 0;
+    border-radius: 14px; border: 2px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05);
+    cursor: pointer; font-size: 15px; font-family: inherit; color: var(--text-primary);
+    transition: all 0.3s ease; backdrop-filter: blur(10px); }
+  .quiz-opt:hover { border-color: var(--secondary); background: rgba(245,158,11,0.1); transform: translateX(4px); }
+  .quiz-opt.correct { border-color: var(--success); background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(5,150,105,0.1)); animation: pulse 0.5s ease; }
+  .quiz-opt.wrong { border-color: var(--danger); background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1)); animation: shake 0.5s ease; }
+  
+  .chat-log { height: 350px; overflow-y: auto; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+  .msg { padding: 12px 18px; border-radius: 18px; margin: 10px 0; max-width: 85%; font-size: 14px; line-height: 1.7; animation: slideUp 0.3s ease; }
+  .msg.user { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; box-shadow: 0 4px 16px rgba(99,102,241,0.3); }
+  .msg.bot { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; color: var(--text-secondary); }
+  .chat-input { display: flex; gap: 10px; }
+  .chat-input input { flex: 1; padding: 14px 20px; border-radius: 50px; border: 2px solid rgba(99,102,241,0.5);
+    font-size: 15px; font-family: inherit; background: rgba(255,255,255,0.05); color: var(--text-primary); transition: all 0.3s ease; }
+  .chat-input input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
+  .chat-input input::placeholder { color: var(--text-muted); }
+  
+  .resource-list a { display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; margin: 10px 0;
+    color: var(--secondary); text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+  .resource-list a:hover { background: rgba(245,158,11,0.1); border-color: var(--secondary); transform: translateX(4px); color: #fff; }
+  .resource-list a span { font-weight: 400; color: var(--text-muted); font-size: 13px; }
+  .resource-list a .type-badge { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .type-video { background: rgba(236,72,153,0.2); color: var(--accent); }
+  .type-course { background: rgba(99,102,241,0.2); color: var(--primary-light); }
+  .type-book { background: rgba(6,182,212,0.2); color: var(--info); }
+  .type-practice { background: rgba(245,158,11,0.2); color: var(--secondary); }
+  
+  .stat { text-align: center; padding: 24px 16px; border-radius: 18px; color: #fff;
+    background: linear-gradient(135deg, currentColor 0%, color-mix(in srgb, currentColor 70%, black) 100%);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3); transition: transform 0.3s ease; }
+  .stat:hover { transform: translateY(-4px); }
+  
+  .home-hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #3730a3 100%);
+    color: #fff; border-radius: 24px; padding: 60px 24px; text-align: center; position: relative; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(99,102,241,0.4); }
+  .home-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(236,72,153,0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite; }
+  .home-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(to top, var(--primary), transparent); pointer-events: none; }
+  .home-hero > * { position: relative; z-index: 1; }
+  
+  .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  
+  .creator-badge { display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.1));
+    border: 1px solid rgba(99,102,241,0.3); border-radius: 50px; padding: 12px 24px;
+    margin: 20px auto; color: var(--primary-light); font-weight: 600; font-size: 15px; backdrop-filter: blur(10px); }
+  .creator-badge::before { content: '🚀'; } .creator-badge::after { content: '🚀'; }
+  
+  .profile-image { width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+    border: 4px solid var(--secondary); box-shadow: 0 8px 32px rgba(245,158,11,0.4), 0 0 0 4px rgba(99,102,241,0.3), inset 0 2px 4px rgba(255,255,255,0.1);
+    margin: 0 auto 20px; display: block; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .profile-image:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(245,158,11,0.5), 0 0 0 4px rgba(99,102,241,0.3), inset 0 2px 4px rgba(255,255,255,0.1); }
+  .profile-image-small { width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--secondary); box-shadow: 0 4px 16px rgba(245,158,11,0.3); flex-shrink: 0; }
+  
+  .section-title { font-family: 'Inter', serif; font-size: 1.8rem; color: var(--secondary); margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .section-title::before, .section-title::after { content: '✦'; font-size: 1.5rem; color: var(--accent); }
+  .section-text { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8; max-width: 800px; margin: 0 auto 16px; font-style: italic; }
+  .section-ref { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+  
+  .floating-elements { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .floating-element { position: absolute; font-size: 2rem; opacity: 0.05; animation: float 20s infinite ease-in-out; }
+  
+  .section-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--secondary), transparent); margin: 30px 0; border-radius: 2px; }
+  
+  .founder-section { text-align: center; padding: 30px 0; }
+  .founder-card { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(236,72,153,0.1));
+    border: 2px solid var(--secondary); border-radius: 20px; padding: 30px; max-width: 600px; margin: 0 auto; position: relative; overflow: hidden; }
+  .founder-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%); animation: pulse 6s ease-in-out infinite; }
+  .founder-card > * { position: relative; z-index: 1; }
+  .founder-name { font-family: 'Inter', serif; font-size: 2rem; color: var(--secondary); margin: 16px 0 8px; }
+  .founder-title { color: var(--accent); font-weight: 600; font-size: 1.1rem; margin-bottom: 16px; }
+  .founder-bio { color: var(--text-secondary); line-height: 1.8; font-size: 1rem; }
+  
+  .confidence-tip { background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(99,102,241,0.1));
+    border: 1px solid rgba(6,182,212,0.3); border-radius: 16px; padding: 20px; margin: 16px 0;
+    border-left: 4px solid var(--info); }
+  .confidence-tip h4 { color: var(--info); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .confidence-tip p { color: var(--text-secondary); font-size: 0.95rem; }
+  
+  .week-badge { display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(245,158,11,0.2));
+    border: 1px solid rgba(99,102,241,0.3); border-radius: 50px; padding: 6px 14px;
+    font-size: 12px; font-weight: 600; color: var(--primary-light); }
+  
+  @media (max-width: 640px) {
+    .card { padding: 20px; }
+    .nav { padding: 8px 12px; margin: -20px -20px 16px -20px; }
+    .nav button { padding: 8px 14px; font-size: 12px; }
+    .home-hero { padding: 40px 16px; border-radius: 16px; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .profile-image { width: 100px; height: 100px; }
+    .profile-image-small { width: 44px; height: 44px; }
+    .founder-name { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="floating-elements" id="floating-elements"></div>
+  <div class="nav" id="nav"></div>
+
+  <!-- ================= HOME ================= -->
+  <div class="page active" id="page-home" style="--c:#6366f1">
+    <div class="home-hero">
+      <img src="profile-photo.jpg" alt="Your Learning Journey" class="profile-image" onerror="this.style.display='none'">
+      <h1>🚀 AI/ML Learning Academy</h1>
+      <h2 class="urdu">آپ کا ذاتی راستہ — ازERO سے AI تک</h2>
+      <p style="margin:20px 0;font-size:18px;max-width:800px;margin-left:auto;margin-right:auto;opacity:0.95">
+        Your personalized roadmap: Python → Math → ML → Deep Learning → GenAI — with progress tracking, AI tutor, and confidence-building design.
+      </p>
+      <div class="creator-badge">Designed for <strong>Your Learning Journey</strong></div>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" onclick="go('roadmap')">🗺️ View Roadmap</button>
+        <button class="btn ghost" onclick="go('progress')">📊 My Progress</button>
+        <button class="btn accent" onclick="go('tutor')">🤖 AI Learning Coach</button>
+      </div>
+    </div>
+
+    <!-- Confidence Section -->
+    <div class="founder-section">
+      <div class="founder-card">
+        <h3 style="color:var(--secondary);font-size:1.3rem;margin-bottom:8px">💪 Your Learning Profile</h3>
+        <div class="founder-name">Personal AI/ML Journey</div>
+        <div class="founder-title">Custom Path: Python → Math → ML → DL → GenAI</div>
+        <p class="founder-bio">
+          Designed specifically for your goals: starting from zero coding knowledge, bridging the math gap after Class 10, 
+          and building confidence with PowerShell-free, beginner-friendly tools. Every step includes confidence tips,
+          practice projects, and an AI coach that explains in plain language.
+        </p>
+      </div>
+    </div>
+
+    <!-- Motivational Quotes -->
+    <div class="section-divider"></div>
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(236,72,153,0.1));border-color:rgba(99,102,241,0.4)">
+      <h3 style="color:var(--secondary);margin-bottom:12px">💡 Remember</h3>
+      <p class="urdu" style="font-size:1.2em;margin-bottom:12px">ہر قدم اہم ہے — ہے کن Бо لتے رہو، کامیابی قریب ہے</p>
+      <p style="color:var(--text-secondary);font-style:italic">"The expert in anything was once a beginner." — Helen Hayes</p>
+      <p class="urdu-sm" style="margin-top:8px">"جو بھی کسی کام میں ماہر ہے، وہ کبھی نوآموز تھا۔"</p>
+    </div>
+
+    <!-- Phase Overview -->
+    <div class="card" style="--c:#6366f1">
+      <h3>🗺️ Your 5-Phase Roadmap</h3>
+      <div class="levels-grid" style="margin-top:16px">
+        <div class="stat" style="background:linear-gradient(135deg,#6366f1,#818cf8)">🐍 Phase 1<br><small>Python Fundamentals</small><br><small class="urdu">پایتھون بنیادی</small></div>
+        <div class="stat" style="background:linear-gradient(135deg,#06b6d4,#22d3ee)">📐 Phase 2<br><small>Math for ML</small><br><small class="urdu">مٹھ لل ایم ایل</small></div>
+        <div class="stat" style="background:linear-gradient(135deg,#10b981,#34d399)">🤖 Phase 3<br><small>ML Specialization</small><br><small class="urdu">ایم ایل خصوصی</small></div>
+        <div class="stat" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">🧠 Phase 4<br><small>Deep Learning</small><br><small class="urdu">ڈیپ لرننگ</small></div>
+        <div class="stat" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">✨ Phase 5<br><small>GenAI & LLMs</small><br><small class="urdu">جینی ای آئی</small></div>
+      </div>
+    </div>
+
+    <div class="card" style="--c:#f59e0b">
+      <h3>🎯 How This Works</h3>
+      <p>1️⃣ Follow phases in order — each builds on the last &nbsp;•&nbsp; <span class="urdu">مرحلے باصل پر چلو — ہر اگلا پچھلے پر مبنی ہے</span></p>
+      <p>2️⃣ Complete resources, do practice, take quiz &nbsp;•&nbsp; <span class="urdu">وسائل مکمل کرو، مشق کرو، کوئز دو</span></p>
+      <p>3️⃣ Ask AI Coach anytime — no question too small &nbsp;•&nbsp; <span class="urdu">اے آئی کوچ سے پوچھو — کوئی سوال چھوٹا نہیں</span></p>
+      <p>4️⃣ Track progress, build confidence &nbsp;•&nbsp; <span class="urdu">پیش رفت دیکھو، اعتماد بناؤ</span></p>
+    </div>
+
+    <div class="confidence-tip">
+      <h4>💪 Confidence Tip #1</h4>
+      <p>You don't need to know everything before starting. Learn just enough to build the next tiny project. <span class="code">print("Hello")</span> is a valid first step!</p>
+    </div>
+  </div>
+
+  <!-- ================= ROADMAP ================= -->
+  <div class="page" id="page-roadmap" style="--c:#06b6d4">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>🗺️ Learning Roadmap <span class="urdu">— سیکھنے کا نقشہ</span></h2>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="profile-photo.jpg" alt="Your Journey" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Your Learning Journey</div>
+      </div>
+    </div>
+    <p style="margin:8px 0;color:var(--text-secondary)">Complete each phase's resources & practice to unlock the next. <span class="urdu">ہر مرحلے کے وسائل مکمل کرو تاکہ اگلا کھلے۔</span></p>
+    <div id="roadmap-list"></div>
+  </div>
+
+  <!-- ================= PHASE DETAIL ================= -->
+  <div class="page" id="page-phase" style="--c:#10b981">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <button class="btn ghost small" onclick="go('roadmap')">⬅ Back to Roadmap</button>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Your Journey" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:12px;padding:6px 12px">Your Learning Journey</div>
+      </div>
+    </div>
+    <div id="phase-content"></div>
+  </div>
+
+  <!-- ================= QUIZ ================= -->
+  <div class="page" id="page-quiz" style="--c:#ec4899">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>📝 Quiz <span class="urdu">— آزمائش</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Your Journey" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Your Learning Journey</div>
+      </div>
+    </div>
+    <div id="quiz-content"></div>
+  </div>
+
+  <!-- ================= PROGRESS ================= -->
+  <div class="page" id="page-progress" style="--c:#f59e0b">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>📊 My Progress <span class="urdu">— میری پیش رفت</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Your Journey" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Your Learning Journey</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#f59e0b">
+      <h3 id="overall-label">Overall Progress</h3>
+      <div class="progress-wrap"><div class="progress-bar" id="overall-bar">0%</div></div>
+      <div class="levels-grid" style="margin-top:20px" id="progress-stats"></div>
+    </div>
+    <div class="card" style="--c:#6366f1">
+      <h3>🏅 Milestones <span class="urdu">— اردو</span></h3>
+      <div id="achievements"></div>
+    </div>
+    <button class="btn" style="--c:#ef4444" onclick="resetProgress()">🗑️ Reset Progress</button>
+  </div>
+
+  <!-- ================= AI TUTOR ================= -->
+  <div class="page" id="page-tutor" style="--c:#ec4899">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>🤖 AI Learning Coach <span class="urdu">— اے آئی سیکھنے کا ساتھی</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Your Journey" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Your Learning Journey</div>
+      </div>
+    </div>
+    <p style="margin:6px 0;color:var(--text-secondary)">Ask anything about Python, Math, ML, DL, GenAI — no question too basic. <span class="urdu">کچھ بھی پوچھو — کوئی سوال بنیادی نہیں۔</span></p>
+    <div class="card" style="--c:#ec4899">
+      <div class="chat-log" id="chat-log">
+        <div class="msg bot">Hello! 👋 I'm your AI Learning Coach. <span class="urdu">میں آپ کا سیکھنے کا ساتھی ہوں۔</span> Ask me anything — e.g. "Explain Python lists simply" or "What is a derivative?" or "How do I start with PyTorch?"</div>
+      </div>
+      <div class="chat-input">
+        <input id="chat-in" placeholder="Type your question… / سوال لکھیں…" onkeydown="if(event.key==='Enter')sendMsg()">
+        <button class="btn" style="--c:#ec4899" onclick="sendMsg()">Send ➤</button>
+      </div>
+      <div style="margin-top:14px">
+        <span style="font-size:13px;color:var(--text-muted)">Quick Questions:</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn ghost small" onclick="quickAsk('Explain Python variables and types simply')">Variables?</button>
+          <button class="btn ghost small" onclick="quickAsk('What is a derivative in simple terms?')">Derivative?</button>
+          <button class="btn ghost small" onclick="quickAsk('Explain neural networks like I am 15')">Neural Nets?</button>
+          <button class="btn ghost small" onclick="quickAsk('How to start with PyTorch as beginner?')">PyTorch?</button>
+          <button class="btn ghost small accent" onclick="quickAsk('Confidence tip for when I feel stuck')">💪 Stuck?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============ FLOATING ELEMENTS ============ */
+    const floatingContainer = document.getElementById('floating-elements');
+    const floatingSymbols = ['🐍', '📐', '🤖', '🧠', '✨', '🚀', '💡', '📊', '🔥', '💪'];
+    for(let i=0; i<15; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-element';
+      el.textContent = floatingSymbols[Math.floor(Math.random() * floatingSymbols.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.top = Math.random() * 100 + '%';
+      el.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+      el.style.animationDelay = Math.random() * 20 + 's';
+      el.style.animationDuration = (15 + Math.random() * 15) + 's';
+      floatingContainer.appendChild(el);
+    }
+
+    /* ============ ROADMAP DATA ============ */
+    const PHASES = [
+      { 
+        id: 'phase1', name: 'Phase 1: Python Fundamentals', urdu: 'مرحلہ 1: پایتھون بنیادی', 
+        color: '#6366f1', icon: '🐍',
+        desc: 'Zero to comfortable Python — syntax, logic, data structures, files, virtual environments',
+        udesc: 'صفر سے پیتھون تک — نحو، منطق، ڈیٹا سٹرکچر، فائلیں، ورچوئل انوائرمنٹ',
+        weeks: 4,
+        resources: [
+          { title: 'Python for Everybody (Ch 1-10)', type: 'course', url: 'https://www.py4e.com/', note: 'Dr. Chuck — gentlest intro, free book & videos', weeks: 'Weeks 1-3' },
+          { title: 'Google IT Automation with Python (Course 1)', type: 'course', url: 'https://www.coursera.org/learn/python', note: 'Practical, job-focused, great for beginners', weeks: 'Weeks 1-3' },
+          { title: 'Automate the Boring Stuff (Ch 1-6)', type: 'book', url: 'https://automatetheboringstuff.com/', note: 'Practical scripts from day 1 — free online', weeks: 'Weeks 2-4' },
+          { title: 'Corey Schafer Python Tutorials', type: 'video', url: 'https://www.youtube.com/c/Coreyms', note: 'Clear explanations — watch "Virtual Environments" & "Classes"', weeks: 'Weeks 3-4' },
+          { title: 'Python Official Tutorial', type: 'practice', url: 'https://docs.python.org/3/tutorial/', note: 'Official — read when stuck on syntax', weeks: 'Reference' }
+        ],
+        practice: [
+          'Build a calculator CLI',
+          'Create a to-do list file manager',
+          'Build a number guessing game',
+          'Make a simple expense tracker (JSON file)'
+        ],
+        confidenceTips: [
+          'Syntax errors are normal — they\'re just typos, not intelligence tests',
+          'If stuck 20 min, ask AI Coach or search — don\'t spin wheels',
+          'Type code manually — don\'t copy-paste; muscle memory matters'
+        ],
+        quiz: { q: 'What does `len([1,2,3])` return?', opts: ['3', '[1,2,3]', 'Error', 'None'], a: 0, uq: '`len([1,2,3)]` کیا واپس کرتا ہے؟' }
+      },
+      { 
+        id: 'phase2', name: 'Phase 2: Math for ML', urdu: 'مرحلہ 2: مٹھ برای ایم ایل', 
+        color: '#06b6d4', icon: '📐',
+        desc: 'Linear algebra, calculus, probability — the math you missed after Class 10, taught visually with code',
+        udesc: 'لکیری الجبرا، کیلکلس، احتمال — وہ مٹھ جو 10ویں کے بعد چھوٹ گئی، بصری طور پر سکھائی گئی',
+        weeks: 4,
+        mathLessons: [
+          {
+            id: 'la1', title: 'Vectors & Vector Operations', category: 'Linear Algebra',
+            emoji: '📍', duration: 'Day 1-2',
+            concepts: [
+              { name: 'What is a Vector?', explanation: 'A vector is an ordered list of numbers representing magnitude and direction. In ML: feature vectors, embeddings, gradients.', visual: 'Arrow in space: [2, 3] = 2 units right, 3 units up', code: 'import numpy as np\nv = np.array([2, 3])\nprint("Vector:", v)\nprint("Magnitude:", np.linalg.norm(v))' },
+              { name: 'Vector Addition', explanation: 'Add corresponding components. Geometric: tip-to-tail. ML: combining features, residual connections.', visual: '[1,2] + [3,4] = [4,6] — parallelogram rule', code: 'a = np.array([1, 2])\nb = np.array([3, 4])\nc = a + b  # [4, 6]' },
+              { name: 'Scalar Multiplication', explanation: 'Scale vector by a number. Stretches/shrinks, flips if negative. ML: learning rate × gradient.', visual: '3 × [2, 1] = [6, 3] — stretches 3x', code: 'v = np.array([2, 1])\nresult = 3 * v  # [6, 3]' },
+              { name: 'Dot Product (Inner Product)', explanation: 'Sum of products of corresponding entries. Measures similarity/alignment. ML: attention scores, cosine similarity, neuron output.', visual: '[1,2] · [3,4] = 1×3 + 2×4 = 11', code: 'a = np.array([1, 2])\nb = np.array([3, 4])\ndot = np.dot(a, b)  # 11\ncosine = dot / (np.linalg.norm(a) * np.linalg.norm(b))' },
+              { name: 'Cosine Similarity', explanation: 'Normalized dot product = cos(θ). Range [-1, 1]. 1=same direction, 0=orthogonal, -1=opposite. ML: text similarity, recommendation.', visual: 'cos(θ) = (A·B) / (|A||B|)', code: 'def cosine_sim(a, b):\n    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))\nprint(cosine_sim([1,0], [1,0]))  # 1.0 (identical)\nprint(cosine_sim([1,0], [0,1]))  # 0.0 (orthogonal)' },
+            ],
+            mlApplication: 'Word embeddings (Word2Vec, GloVe) use cosine similarity. Attention in Transformers computes Q·Kᵀ dot products.',
+            practice: 'Compute cosine similarity between [1,2,3] and [2,3,4]. What does 0.99 mean?'
+          },
+          {
+            id: 'la2', title: 'Matrices & Matrix Operations', category: 'Linear Algebra',
+            emoji: '📊', duration: 'Day 3-4',
+            concepts: [
+              { name: 'What is a Matrix?', explanation: 'Rectangular array of numbers. Rows × Columns. ML: dataset (samples × features), weights, transformations.', visual: '2×3 matrix: [[1,2,3], [4,5,6]] — 2 rows, 3 cols', code: 'M = np.array([[1, 2, 3], [4, 5, 6]])\nprint("Shape:", M.shape)  # (2, 3)\nprint("Rows:", M.shape[0], "Cols:", M.shape[1])' },
+              { name: 'Matrix-Vector Multiplication', explanation: 'Transform vector by matrix. Each output = dot product of row with vector. ML: linear layer, feature transformation.', visual: '[[1,2], [3,4]] × [5,6] = [17, 39]', code: 'W = np.array([[1, 2], [3, 4]])\nx = np.array([5, 6])\ny = W @ x  # [17, 39] — linear transformation' },
+              { name: 'Matrix-Matrix Multiplication', explanation: 'Compose transformations. (A×B)×x = A×(B×x). Not commutative! ML: deep network layers, attention.', visual: '(2×3) × (3×2) = (2×2) — inner dims must match', code: 'A = np.array([[1,2,3], [4,5,6]])  # 2×3\nB = np.array([[1,2], [3,4], [5,6]])  # 3×2\nC = A @ B  # 2×2' },
+              { name: 'Transpose & Identity', explanation: 'Swap rows↔cols. Aᵀ. Identity I: diagonal 1s. A×I = A. ML: weight tying, attention masks.', visual: '[[1,2],[3,4]]ᵀ = [[1,3],[2,4]]', code: 'M = np.array([[1, 2], [3, 4]])\nprint(M.T)  # transpose\nprint(np.eye(3))  # 3×3 identity' },
+              { name: 'Determinant & Inverse', explanation: 'det: volume scaling factor. det=0 → singular (no inverse). A⁻¹: undo transformation. ML: solving linear systems, whitening.', visual: 'det([[a,b],[c,d]]) = ad - bc', code: 'M = np.array([[2, 1], [1, 2]])\ndet = np.linalg.det(M)  # 3.0\nMinv = np.linalg.inv(M)  # [[0.67, -0.33], [-0.33, 0.67]]' },
+            ],
+            mlApplication: 'Neural network layers are matrix multiplications. Backprop uses chain rule with matrix transposes.',
+            practice: 'Multiply a 3×4 matrix with a 4×2 matrix. Verify shape is 3×2.'
+          },
+          {
+            id: 'la3', title: 'Eigenvalues, Eigenvectors & SVD', category: 'Linear Algebra',
+            emoji: '🔍', duration: 'Day 5',
+            concepts: [
+              { name: 'Eigenvectors & Eigenvalues', explanation: 'Special vectors that only scale (not rotate) under transformation. A·v = λ·v. λ=eigenvalue, v=eigenvector. ML: PCA, spectral clustering.', visual: 'Matrix stretches eigenvector by eigenvalue λ', code: 'M = np.array([[4, 1], [2, 3]])\neigenvals, eigenvecs = np.linalg.eig(M)\nprint("Eigenvalues:", eigenvals)\nprint("Eigenvectors:\\n", eigenvecs)' },
+              { name: 'Principal Component Analysis (PCA)', explanation: 'Find directions of max variance. Eigenvectors of covariance matrix = principal components. Reduce dimensionality. ML: visualization, denoising, compression.', visual: 'Project data onto top-k eigenvectors', code: 'from sklearn.decomposition import PCA\npca = PCA(n_components=2)\nX_reduced = pca.fit_transform(X)\nprint("Explained variance:", pca.explained_variance_ratio_)' },
+              { name: 'Singular Value Decomposition (SVD)', explanation: 'A = UΣVᵀ. U,V orthogonal, Σ diagonal (singular values). Works for ANY matrix. ML: recommender systems, latent semantic analysis, compression.', visual: 'A = U × Σ × Vᵀ — rotate, scale, rotate', code: 'U, S, Vt = np.linalg.svd(M, full_matrices=False)\nprint("Singular values:", S)\n# Reconstruct: M ≈ U @ np.diag(S) @ Vt' },
+            ],
+            mlApplication: 'PCA for feature reduction. SVD for collaborative filtering (Netflix prize). Word embeddings use truncated SVD.',
+            practice: 'Compute SVD of a 5×3 random matrix. Reconstruct with top 2 singular values.'
+          },
+          {
+            id: 'calc1', title: 'Derivatives & Differentiation Rules', category: 'Calculus',
+            emoji: '📈', duration: 'Day 6-7',
+            concepts: [
+              { name: 'What is a Derivative?', explanation: 'Instantaneous rate of change. Slope of tangent line. Limit definition: f\'(x) = lim(h→0) [f(x+h)-f(x)]/h. ML: gradient = direction of steepest increase.', visual: 'Slope of tangent at point x', code: 'import sympy as sp\nx = sp.symbols("x")\nf = x**2 + 3*x + 1\nsp.diff(f, x)  # 2*x + 3' },
+              { name: 'Power Rule', explanation: 'd/dx[xⁿ] = n·xⁿ⁻¹. Most common rule. ML: polynomial features, activation derivatives.', visual: 'x³ → 3x², x⁰·⁵ → 0.5x⁻⁰·⁵', code: 'sp.diff(x**5, x)  # 5*x**4\nsp.diff(sp.sqrt(x), x)  # 1/(2*sqrt(x))' },
+              { name: 'Chain Rule (CRITICAL for ML)', explanation: 'd/dx[f(g(x))] = f\'(g(x)) · g\'(x). "Outside derivative × inside derivative". ML: backpropagation IS chain rule applied repeatedly.', visual: 'sin(x²) → cos(x²) · 2x', code: 'sp.diff(sp.sin(x**2), x)  # 2*x*cos(x**2)\nsp.diff(sp.exp(3*x), x)  # 3*exp(3*x)' },
+              { name: 'Product & Quotient Rules', explanation: '(fg)\' = f\'g + fg\' ; (f/g)\' = (f\'g - fg\')/g². ML: gradient of loss functions with division.', visual: '(x²·sin x)\' = 2x·sin x + x²·cos x', code: 'sp.diff(x**2 * sp.sin(x), x)\n# 2*x*sin(x) + x**2*cos(x)' },
+              { name: 'Partial Derivatives', explanation: 'Derivative w.r.t one variable, treating others constant. ∂f/∂x. ML: gradient vector = [∂f/∂x₁, ∂f/∂x₂, ...].', visual: 'f(x,y) = x²y + y³ → ∂f/∂x = 2xy, ∂f/∂y = x² + 3y²', code: 'x, y = sp.symbols("x y")\nf = x**2 * y + y**3\nsp.diff(f, x)  # 2*x*y\nsp.diff(f, y)  # x**2 + 3*y**2' },
+            ],
+            mlApplication: 'Backpropagation computes ∂Loss/∂Weight for every weight using chain rule. Autograd (PyTorch/TensorFlow) does this automatically.',
+            practice: 'Find derivative of f(x) = (3x² + 2x)⁴. Then compute gradient of f(x,y) = x²y + sin(y).'
+          },
+          {
+            id: 'calc2', title: 'Gradients, Optimization & Gradient Descent', category: 'Calculus',
+            emoji: '⬇️', duration: 'Day 8-9',
+            concepts: [
+              { name: 'Gradient Vector', explanation: '∇f = [∂f/∂x₁, ∂f/∂x₂, ..., ∂f/∂xₙ]. Points in direction of steepest AScent. Negative gradient = steepest descent. ML: update weights opposite to gradient.', visual: '∇f(x,y) = [∂f/∂x, ∂f/∂y] — arrow pointing uphill', code: 'def gradient(f, x, h=1e-5):\n    grad = np.zeros_like(x)\n    for i in range(len(x)):\n        x_plus = x.copy(); x_plus[i] += h\n        x_minus = x.copy(); x_minus[i] -= h\n        grad[i] = (f(x_plus) - f(x_minus)) / (2*h)\n    return grad' },
+              { name: 'Gradient Descent Algorithm', explanation: 'x_new = x_old - α·∇f(x_old). α = learning rate. Repeat until convergence. ML: training loop for ALL models.', visual: 'x ← x - α∇f(x) — step downhill', code: 'def gradient_descent(f, init_x, lr=0.01, steps=100):\n    x = init_x.copy()\n    history = []\n    for i in range(steps):\n        grad = gradient(f, x)\n        x = x - lr * grad\n        history.append(f(x))\n    return x, history' },
+              { name: 'Learning Rate & Convergence', explanation: 'Too large → overshoot/diverge. Too small → slow. Adaptive: Adam, RMSprop. ML: most important hyperparameter.', visual: 'LR=0.1: zigzag. LR=0.001: slow. LR=0.01: smooth.', code: 'import torch\nx = torch.tensor([2.0], requires_grad=True)\nopt = torch.optim.Adam([x], lr=0.01)\nfor _ in range(100):\n    loss = x**2\n    opt.zero_grad()\n    loss.backward()\n    opt.step()' },
+              { name: 'Second Derivative & Convexity', explanation: 'f\'\'(x) > 0 → convex (bowl shaped, global min). f\'\'(x) < 0 → concave. ML: convex loss = guaranteed global minimum.', visual: 'x²: f\'\'=2>0 (convex). -x²: f\'\'=-2<0 (concave)', code: 'sp.diff(sp.diff(x**2, x), x)  # 2 (convex)\nsp.diff(sp.diff(-x**2, x), x)  # -2 (concave)' },
+            ],
+            mlApplication: 'Every neural network training uses gradient descent. Adam optimizer adapts learning rate per parameter.',
+            practice: 'Implement gradient descent for f(x) = x⁴ - 4x² + 2. Try different learning rates.'
+          },
+          {
+            id: 'calc3', title: 'Multivariable Chain Rule & Backpropagation', category: 'Calculus',
+            emoji: '🔗', duration: 'Day 10',
+            concepts: [
+              { name: 'Multivariable Chain Rule', explanation: 'z = f(y), y = g(x) → dz/dx = (∂f/∂y) · (dg/dx). Vector form: ∇ₓz = (∂y/∂x)ᵀ ∇ᵧf. ML: backprop through layers.', visual: 'Input → Layer1 → Layer2 → Loss. Gradients flow backward.', code: 'x = sp.symbols("x")\ny = sp.sin(x)\nz = y**2\nsp.diff(z, x)  # 2*sin(x)*cos(x) = sin(2x)' },
+              { name: 'Backpropagation = Chain Rule', explanation: 'Forward: x → W₁ → σ → W₂ → Loss. Backward: ∂L/∂W₂ = ∂L/∂out · σ\' · x. ∂L/∂W₁ = ∂L/∂out · W₂ᵀ · σ\' · x. ML: autograd computes this!', visual: 'Loss ← Output ← Hidden ← Input. Gradients flow ←', code: 'import torch\nx = torch.randn(10, 5)\nW1 = torch.randn(5, 3, requires_grad=True)\nW2 = torch.randn(3, 1, requires_grad=True)\nout = torch.relu(x @ W1) @ W2\nloss = out.mean()\nloss.backward()  # Computes ∂Loss/∂W1, ∂Loss/∂W2 automatically' },
+              { name: 'Jacobian & Hessian', explanation: 'Jacobian: matrix of all first partials. Hessian: matrix of all second partials. ML: Newton method, curvature, optimization landscape.', visual: 'Jᵢⱼ = ∂fᵢ/∂xⱼ. Hᵢⱼ = ∂²f/∂xᵢ∂xⱼ', code: 'import torch\nfrom torch.autograd.functional import jacobian, hessian\nf = lambda x: x[0]**2 + x[1]**3\nx = torch.tensor([1.0, 2.0])\njac = jacobian(f, x)\nhes = hessian(f, x)' },
+            ],
+            mlApplication: 'Backprop IS the multivariable chain rule. Understanding it helps debug gradient vanishing/exploding.',
+            practice: 'Manually compute gradients for 2-layer network: x → W₁ → ReLU → W₂ → MSE loss.'
+          },
+          {
+            id: 'prob1', title: 'Probability Fundamentals', category: 'Probability & Statistics',
+            emoji: '🎲', duration: 'Day 11-12',
+            concepts: [
+              { name: 'Random Variables & Distributions', explanation: 'RV: numerical outcome of random process. Discrete (PMF) vs Continuous (PDF). ML: model uncertainty, latent variables.', visual: 'Bernoulli (coin), Gaussian (heights), Categorical (dice)', code: 'import numpy as np\nnp.random.seed(42)\nprint("Bernoulli:", np.random.binomial(1, 0.5, 10))\nprint("Gaussian:", np.random.normal(0, 1, 5))\nprint("Categorical:", np.random.choice([0,1,2], 10, p=[0.2,0.5,0.3]))' },
+              { name: 'Expectation, Variance, Covariance', explanation: 'E[X] = average. Var(X) = E[(X-μ)²] = spread. Cov(X,Y) = E[(X-μₓ)(Y-μᵧ)] = relationship. ML: bias-variance tradeoff, feature correlation.', visual: 'E[X] = center. Var = width. Cov = tilt.', code: 'X = np.random.normal(0, 1, 10000)\nprint("E[X]:", X.mean())\nprint("Var:", X.var())\nY = 2*X + np.random.normal(0, 0.1, 10000)\nprint("Cov:", np.cov(X, Y)[0,1])' },
+              { name: 'Bayes\' Theorem', explanation: 'P(A|B) = P(B|A)P(A)/P(B). Update beliefs with evidence. ML: Naive Bayes, Bayesian inference, posterior = likelihood × prior / evidence.', visual: 'Posterior ∝ Likelihood × Prior', code: 'def bayes(prior, likelihood, evidence):\n    return (likelihood * prior) / evidence\n# Example: disease test\nprior = 0.01      # 1% have disease\nlikelihood = 0.99 # test 99% accurate\nevidence = 0.99*0.01 + 0.01*0.99\nposterior = bayes(prior, likelihood, evidence)\nprint(f"P(disease|positive) = {posterior:.2%}")' },
+              { name: 'Common Distributions in ML', explanation: 'Gaussian (continuous, symmetric), Bernoulli (binary), Categorical (multi-class), Exponential (time), Beta (probabilities), Dirichlet (distributions over distributions). ML: output layers, priors, uncertainty.', visual: 'Gaussian: bell curve. Beta: [0,1] probabilities.', code: 'from scipy import stats\n# Gaussian\nprint(stats.norm.pdf(0, 0, 1))  # peak at 0\n# Beta\nprint(stats.beta.pdf(0.5, 2, 2))  # symmetric\n# Categorical\nprint(stats.multinomial.pmf([1,0,0], 1, [0.7,0.2,0.1]))' },
+            ],
+            mlApplication: 'Classification outputs = Categorical distribution. VAE latent = Gaussian. Policy gradients = Categorical sampling.',
+            practice: 'Simulate 1000 coin flips. Compute empirical P(heads). Compare to 0.5. Plot convergence.'
+          },
+          {
+            id: 'prob2', title: 'Maximum Likelihood & Bayesian Inference', category: 'Probability & Statistics',
+            emoji: '🔍', duration: 'Day 13',
+            concepts: [
+              { name: 'Maximum Likelihood Estimation (MLE)', explanation: 'Find parameters θ that maximize P(data|θ). "What params make observed data most likely?" ML: training = MLE for params.', visual: 'argmax_θ P(D|θ) — find peak of likelihood', code: 'from scipy.optimize import minimize_scalar\n# MLE for Gaussian mean\nimport numpy as np\ndata = np.random.normal(5, 2, 100)\nneg_log_lik = lambda mu: -np.sum(stats.norm.logpdf(data, mu, 2))\nresult = minimize_scalar(neg_log_lik)\nprint("MLE mean:", result.x)' },
+              { name: 'MAP & Bayesian Inference', explanation: 'MAP: argmax P(θ|D) = argmax P(D|θ)P(θ). Prior regularizes. Full Bayesian: compute full posterior P(θ|D). ML: regularization = prior, Bayesian neural nets.', visual: 'Posterior ∝ Likelihood × Prior', code: '# MAP for Gaussian with Gaussian prior\nfrom scipy.stats import norm\ndef log_posterior(mu):\n    likelihood = np.sum(norm.logpdf(data, mu, 1))\n    prior_log = norm.logpdf(mu, 0, 10)  # weak prior\n    return likelihood + prior_log\nresult = minimize_scalar(lambda m: -log_posterior(m))\nprint("MAP:", result.x)' },
+              { name: 'Information Theory Basics', explanation: 'Entropy H(X) = -Σ P(x)log P(x) = uncertainty. Cross-entropy H(P,Q) = -Σ P(x)log Q(x). KL divergence = "distance" between distributions. ML: classification loss = cross-entropy.', visual: 'H = -Σ p log p. CE = -Σ p log q. KL = Σ p log(p/q)', code: 'from scipy.stats import entropy\np = [0.5, 0.5]  # fair coin\nq = [0.9, 0.1]  # biased\nprint("H(p):", entropy(p))           # 0.693\nprint("CE(p,q):", entropy(p, q))     # 1.20\nprint("KL(p||q):", entropy(p, q) - entropy(p))  # 0.51' },
+            ],
+            mlApplication: 'Cross-entropy loss = negative log likelihood. KL divergence in VAE loss. Entropy in policy gradients.',
+            practice: 'Derive cross-entropy loss for binary classification from MLE of Bernoulli.'
+          }
+        ],
+        resources: [
+          { title: 'Mathematics for ML & Data Science (DeepLearning.AI)', type: 'course', url: 'https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science', note: 'Course 1: Linear Algebra, Course 2: Calculus, Course 3: Probability — by Luis Serrano', weeks: 'Weeks 1-4' },
+          { title: 'Khan Academy Linear Algebra', type: 'course', url: 'https://www.khanacademy.org/math/linear-algebra', note: 'Free, visual, self-paced — vectors, matrices, eigenvalues', weeks: 'Weeks 1-2' },
+          { title: 'Khan Academy Calculus', type: 'course', url: 'https://www.khanacademy.org/math/calculus-1', note: 'Derivatives, chain rule, gradients — essential for backprop', weeks: 'Weeks 2-3' },
+          { title: 'Khan Academy Statistics & Probability', type: 'course', url: 'https://www.khanacademy.org/math/statistics-probability', note: 'Distributions, Bayes, hypothesis testing — free & excellent', weeks: 'Weeks 3-4' },
+          { title: '3Blue1Brown Essence of Linear Algebra', type: 'video', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab', note: 'Visual intuition — watch first 6 videos minimum', weeks: 'Week 1' },
+          { title: '3Blue1Brown Essence of Calculus', type: 'video', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr', note: 'Visual derivatives & chain rule — watch first 5', weeks: 'Week 2' },
+          { title: 'StatQuest with Josh Starmer', type: 'video', url: 'https://www.youtube.com/c/joshstarmer', note: 'Best stats intuition — "PCA", "Gradient Descent", "Bayes Theorem"', weeks: 'Weeks 2-4' },
+          { title: 'Mathematics for Machine Learning (Book)', type: 'book', url: 'https://mml-book.github.io/', note: 'Free PDF by Deisenroth, Faisal, Ong — rigorous but accessible', weeks: 'Reference' }
+        ],
+        practice: [
+          'Implement vector operations (add, dot, cosine) from scratch in NumPy',
+          'Build a matrix multiplication visualizer showing row×column',
+          'Implement gradient descent for f(x) = x⁴ - 4x² + 2 with visualization',
+          'Create a backpropagation demo for 2-layer network (manual + autograd)',
+          'Simulate Bayesian updating: prior → evidence → posterior animation',
+          'Plot loss landscapes for convex vs non-convex functions',
+          'Implement PCA from scratch using eigendecomposition'
+        ],
+        confidenceTips: [
+          'You don\'t need to prove theorems — understand intuition & how to use in code',
+          'Khan Academy lets you rewind infinitely — use it!',
+          '3Blue1Brown videos = math intuition in 15 min vs 3 hr textbook',
+          'Every ML paper uses these concepts — you\'re learning the universal language',
+          'When stuck: draw it, code it, explain it to AI Coach'
+        ],
+        quiz: { q: 'What does the gradient point toward?', opts: ['Steepest descent', 'Steepest ascent', 'Minimum', 'Zero'], a: 1, uq: 'گریڈیئن کس سمت کی طرف اشارہ کرتا ہے؟' }
+      },
+      { 
+        id: 'phase3', name: 'Phase 3: ML Specialization', urdu: 'مرحلہ 3: ایم ایل خصوصی', 
+        color: '#10b981', icon: '🤖',
+        desc: 'Supervised/unsupervised learning, model evaluation, scikit-learn, end-to-end projects',
+        udesc: 'نظارات/بے نظارات لرننگ، ماڈل جائزہ، سائیکٹ لرن، انتہا سے انتہا تک پراجیکٹس',
+        weeks: 4,
+        resources: [
+          { title: 'ML Specialization (Andrew Ng, DeepLearning.AI)', type: 'course', url: 'https://www.coursera.org/specializations/machine-learning-introduction', note: '3 courses: Supervised, Unsupervised, Best Practices — Andrew Ng explains slowly & clearly', weeks: 'Weeks 1-4' },
+          { title: 'Hands-On ML with Scikit-Learn & TensorFlow (Ch 1-3)', type: 'book', url: 'https://github.com/ageron/handson-ml2', note: 'Aurelien Geron — practical, code-first, free notebooks', weeks: 'Weeks 1-3' },
+          { title: 'StatQuest with Josh Starmer', type: 'video', url: 'https://www.youtube.com/c/joshstarmer', note: 'Best ML intuition — watch "Random Forest", "Gradient Boost", "Cross Validation"', weeks: 'Weeks 2-4' },
+          { title: 'Kaggle Micro-Courses', type: 'practice', url: 'https://www.kaggle.com/learn', note: 'Free, interactive — "Pandas", "Intro to ML", "Feature Engineering"', weeks: 'Weeks 2-4' }
+        ],
+        practice: [
+          'Predict house prices (regression) — California housing dataset',
+          'Classify iris flowers (classification) — classic starter',
+          'Build a customer churn prediction model',
+          'Enter a Kaggle beginner competition (Titanic)'
+        ],
+        confidenceTips: [
+          'Andrew Ng repeats key concepts — that\'s intentional, not boring',
+          'Start with scikit-learn — it\'s just Python functions, not magic',
+          'Your first models WILL be bad — that\'s the learning process'
+        ],
+        quiz: { q: 'Which is a supervised learning task?', opts: ['Clustering', 'Dimensionality reduction', 'Classification', 'Anomaly detection'], a: 2, uq: 'نظارات لرننگ کا کام کون سا ہے؟' }
+      },
+      { 
+        id: 'phase4', name: 'Phase 4: Deep Learning', urdu: 'مرحلہ 4: ڈیپ لرننگ', 
+        color: '#ec4899', icon: '🧠',
+        desc: 'Neural networks, CNNs, RNNs, transformers, PyTorch, training tricks, transfer learning',
+        udesc: 'نیورل نیٹورکس، سی این این، آر این این، ٹرانسفارمرز، پائی ٹورچ، ٹریننگ ٹرکس، ٹرانسفیر لرننگ',
+        weeks: 6,
+        resources: [
+          { title: 'Deep Learning Specialization (Andrew Ng)', type: 'course', url: 'https://www.coursera.org/specializations/deep-learning', note: '5 courses: NN, CNN, RNN, Transformers, Structuring Projects — gold standard', weeks: 'Weeks 1-6' },
+          { title: 'Fast.ai Practical Deep Learning', type: 'course', url: 'https://course.fast.ai/', note: 'Top-down approach — build SOTA models in lesson 1, free', weeks: 'Weeks 1-4 (parallel)' },
+          { title: 'PyTorch Official Tutorials', type: 'course', url: 'https://pytorch.org/tutorials/', note: 'Start with "60-min blitz" then "Learn the Basics"', weeks: 'Weeks 1-2' },
+          { title: 'Deep Learning with PyTorch (Book)', type: 'book', url: 'https://pytorch.org/assets/deep-learning/Deep-Learning-with-PyTorch.pdf', note: 'Free PDF — Stevens et al., practical focus', weeks: 'Weeks 2-5' },
+          { title: 'Andrej Karpathy YouTube', type: 'video', url: 'https://www.youtube.com/c/AndrejKarpathy', note: 'Watch "Neural Networks: Zero to Hero" — legendary', weeks: 'Week 3' }
+        ],
+        practice: [
+          'Build MNIST digit classifier (CNN) in PyTorch',
+          'Implement RNN for text generation (character-level)',
+          'Fine-tune ResNet on custom dataset (transfer learning)',
+          'Build a tiny GPT from scratch (Karpathy style)'
+        ],
+        confidenceTips: [
+          'PyTorch errors are verbose — read the last line first (actual error)',
+          'GPU not required — CPU works for learning; use Google Colab free GPU',
+          'Fast.ai lets you build working models BEFORE understanding all math'
+        ],
+        quiz: { q: 'What does CNN stand for?', opts: ['Convolutional Neural Network', 'Continuous Normalized Network', 'Categorical Neural Node', 'Computational Neural Nexus'], a: 0, uq: 'CNN کا مطلب کیا ہے؟' }
+      },
+      { 
+        id: 'phase5', name: 'Phase 5: GenAI & LLMs', urdu: 'مرحلہ 5: جینی ای آئی', 
+        color: '#f59e0b', icon: '✨',
+        desc: 'Transformer architecture, LLM fine-tuning, RAG, prompt engineering, agents, deployment',
+        udesc: 'ٹرانسفارمر آرکٹیکچر، ایل ایل ایم فائن ٹوننگ، راگ، پرامپٹ انجینئرنگ، ایجنٹس، ڈےپلائمینٹ',
+        weeks: 4,
+        resources: [
+          { title: 'Generative AI with LLMs (DeepLearning.AI)', type: 'course', url: 'https://www.coursera.org/learn/generative-ai-with-llms', note: 'Andrew Ng + industry experts — prompt engineering, fine-tuning, RAG, agents', weeks: 'Weeks 1-3' },
+          { title: 'LLM University (Cohere)', type: 'course', url: 'https://cohere.com/llmu', note: 'Free, practical — embeddings, reranking, RAG, agents', weeks: 'Weeks 2-4' },
+          { title: 'Build an LLM from Scratch (Sebastian Raschka)', type: 'book', url: 'https://github.com/rasbt/LLMs-from-scratch', note: 'Step-by-step GPT implementation — code + explanations', weeks: 'Weeks 3-4' },
+          { title: 'LangChain & LangGraph Docs', type: 'practice', url: 'https://python.langchain.com/', note: 'Build agents, RAG pipelines, tool use — start with "Quickstart"', weeks: 'Week 4' },
+          { title: 'Hugging Face Course', type: 'course', url: 'https://huggingface.co/learn', note: 'Transformers library, model hub, training, deployment — free cert', weeks: 'Week 4' }
+        ],
+        practice: [
+          'Fine-tune a small LLM (LoRA) on custom data',
+          'Build a RAG chatbot with your own documents',
+          'Create an AI agent that uses tools (search, calc, code)',
+          'Deploy a model as API with FastAPI + Docker'
+        ],
+        confidenceTips: [
+          'LLMs are just next-token predictors — not magic, just probability',
+          'Prompt engineering = clear communication, not secret spells',
+          'Start with small models (1B-7B) — run locally with Ollama/llama.cpp'
+        ],
+        quiz: { q: 'What does RAG stand for?', opts: ['Retrieval-Augmented Generation', 'Random Access Generation', 'Recursive Attention Gradient', 'Reinforced Autoencoder Graph'], a: 0, uq: 'RAG کا مطلب کیا ہے؟' }
+      }
+    ];
+
+    const QUIZ_BANK = {
+      phase1: PHASES[0].quiz,
+      phase2: PHASES[1].quiz,
+      phase3: PHASES[2].quiz,
+      phase4: PHASES[3].quiz,
+      phase5: PHASES[4].quiz
+    };
+
+    /* ============ STATE ============ */
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem('aiml_progress') || '{}'); } catch(e) { progress = {}; }
+    function saveProg(){ try { localStorage.setItem('aiml_progress', JSON.stringify(progress)); } catch(e){} }
+
+    let currentPhase = null;
+
+    /* ============ NAV ============ */
+    const TABS = [['home','🏠 Home'],['roadmap','🗺️ Roadmap'],['progress','📊 Progress'],['tutor','🤖 AI Coach']];
+    const NAV = document.getElementById('nav');
+    TABS.forEach(([id,label],i)=>{
+      const b=document.createElement('button'); b.textContent=label; b.id='tab-'+id;
+      b.onclick=()=>go(id); NAV.appendChild(b);
+    });
+    function go(page){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.getElementById('page-'+page).classList.add('active');
+      document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+      const t=document.getElementById('tab-'+page); if(t) t.classList.add('active');
+      if(page==='roadmap') renderRoadmap();
+      if(page==='progress') renderProgress();
+      window.scrollTo(0,0);
+    }
+
+    /* ============ ROADMAP ============ */
+    function isPhaseUnlocked(idx){
+      if(idx===0) return true;
+      const prev = PHASES[idx-1];
+      return prev.resources.every(r=>progress[prev.id+'-'+r.title] && progress[prev.id+'-'+r.title].done);
+    }
+    function phasePct(ph){
+      const done = ph.resources.filter(r=>progress[ph.id+'-'+r.title]&&progress[ph.id+'-'+r.title].done).length;
+      return Math.round(done/ph.resources.length*100);
+    }
+    function renderRoadmap(){
+      const el=document.getElementById('roadmap-list'); el.innerHTML='';
+      PHASES.forEach((ph,i)=>{
+        const unlocked=isPhaseUnlocked(i), pct=phasePct(ph);
+        const c=document.createElement('div'); c.className='card'+(unlocked?'':' lock'); c.style.setProperty('--c',ph.color);
+        c.innerHTML=`<span class="badge" style="--c:${ph.color}">${ph.icon} ${ph.name} <span class="week-badge">${ph.weeks} weeks</span></span>
+          <h3>${ph.desc}</h3><p class="urdu" style="color:var(--text-muted)">${ph.udesc}</p>
+          <div class="progress-wrap" style="margin:12px 0"><div class="progress-bar" style="width:${pct}%">${pct}%</div></div>
+          ${unlocked?`<button class="btn" style="--c:${ph.color}" onclick="openPhase('${ph.id}')">📖 Open Phase</button>`
+                    :'<p style="color:var(--text-muted)">🔒 Complete previous phase to unlock. <span class="urdu">پچھلا مرحلہ مکمل کریں۔</span></p>'}`;
+        el.appendChild(c);
+      });
+    }
+    function openPhase(phId){
+      const ph=PHASES.find(p=>p.id===phId);
+      currentPhase=ph;
+      const html=[];
+      html.push(`<div class="card" style="--c:${ph.color}">
+        <span class="badge" style="--c:${ph.color}">${ph.icon} ${ph.name} <span class="week-badge">${ph.weeks} weeks</span></span>
+        <h2>${ph.desc}</h2><p class="urdu" style="color:var(--text-muted)">${ph.udesc}</p>`);
+      
+      // Confidence Tips
+      html.push(`<h3 style="margin-top:16px">💪 Confidence Tips</h3>`);
+      ph.confidenceTips.forEach(tip=>html.push(`<div class="confidence-tip"><p>${tip}</p></div>`));
+      
+      // Math Lessons (for Phase 2) or Resources (other phases)
+      if (ph.mathLessons) {
+        // Phase 2: Detailed Math Lessons
+        html.push(`<h3 style="margin-top:16px">📚 Math Lessons (Interactive)</h3>`);
+        ph.mathLessons.forEach((lesson, lIdx) => {
+          const lessonKey = ph.id + '-lesson-' + lesson.id;
+          const lessonDone = progress[lessonKey] && progress[lessonKey].done;
+          html.push(`
+            <div class="card" style="margin:16px 0;--c:${ph.color};background:linear-gradient(135deg,rgba(6,182,212,0.1),rgba(99,102,241,0.05));border-color:rgba(6,182,212,0.3);">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+                <span class="badge" style="--c:${ph.color};font-size:14px;">${lesson.emoji} ${lesson.title}</span>
+                <span class="week-badge" style="font-size:12px;">${lesson.duration}</span>
+                <span class="badge" style="--c:${ph.color};font-size:12px;">${lesson.category}</span>
+                <input type="checkbox" ${lessonDone?'checked':''} onchange="toggleLesson('${ph.id}','${lesson.id}',this.checked)" style="margin-left:auto;width:20px;height:20px;cursor:pointer;">
+              </div>
+              
+              <div style="display:grid;gap:12px;">
+                ${lesson.concepts.map(concept => `
+                  <div class="example-box" style="margin:8px 0;">
+                    <h4 style="color:var(--secondary);margin-bottom:8px;display:flex;align-items:center;gap:8px;">${concept.name}</h4>
+                    <p style="color:var(--text-secondary);margin-bottom:8px;">${concept.explanation}</p>
+                    <div style="background:rgba(99,102,241,0.1);border-left:3px solid var(--primary);padding:8px 12px;border-radius:6px;margin:8px 0;font-size:13px;color:var(--text-muted);">${concept.visual}</div>
+                    <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;color:#e0e0e0;">${concept.code.replace(/\n/g, '<br>').replace(/  /g, '&nbsp;&nbsp;')}</div>
+                  </div>
+                `).join('')}
+              </div>
+              
+              <div class="confidence-tip" style="margin-top:16px;">
+                <h4 style="color:var(--info);margin-bottom:8px;">🎯 ML Application</h4>
+                <p style="color:var(--text-secondary);">${lesson.mlApplication}</p>
+              </div>
+              
+              <div class="practice-box" style="margin-top:16px;">
+                <strong>🛠️ Practice:</strong> ${lesson.practice}
+              </div>
+            </div>
+          `);
+        });
+        
+        // Resources
+        html.push(`<h3 style="margin-top:16px">📚 Recommended Resources</h3><div class="resource-list">`);
+        ph.resources.forEach((r, idx)=>{
+          const done = progress[ph.id+'-'+r.title] && progress[ph.id+'-'+r.title].done;
+          const typeClass = 'type-'+r.type;
+          html.push(`<a href="${r.url}" target="_blank" class="${done?'':'not-done'}">
+            <span class="week-badge">${r.weeks || ''}</span>
+            <b>${r.title}</b>
+            <span class="type-badge ${typeClass}">${r.type.toUpperCase()}</span>
+            <span>— ${r.note}</span>
+          </a>`);
+        });
+        html.push(`</div>`);
+      } else {
+        // Other phases: Original Resources
+        html.push(`<h3 style="margin-top:16px">📚 Resources (in order)</h3><div class="resource-list">`);
+        ph.resources.forEach((r, idx)=>{
+          const done = progress[ph.id+'-'+r.title] && progress[ph.id+'-'+r.title].done;
+          const typeClass = 'type-'+r.type;
+          html.push(`<a href="${r.url}" target="_blank" class="${done?'':'not-done'}">
+            <span class="week-badge">${r.weeks || ''}</span>
+            <b>${r.title}</b>
+            <span class="type-badge ${typeClass}">${r.type.toUpperCase()}</span>
+            <span>— ${r.note}</span>
+          </a>`);
+        });
+        html.push(`</div>`);
+      }
+      
+      // Practice Projects
+      html.push(`<h3 style="margin-top:16px">🛠️ Practice Projects</h3><div class="practice-box">`);
+      ph.practice.forEach((p, idx)=>{
+        const done = progress[ph.id+'-practice-'+idx] && progress[ph.id+'-practice-'+idx].done;
+        html.push(`<label style="display:flex;align-items:center;gap:12px;margin:10px 0;cursor:pointer;">
+          <input type="checkbox" ${done?'checked':''} onchange="togglePractice('${ph.id}',${idx},this.checked)">
+          <span style="flex:1">${p}</span>
+        </label>`);
+      });
+      html.push(`</div>`);
+      
+      // Confidence Tips
+      html.push(`<h3 style="margin-top:16px">💪 Confidence Tips</h3>`);
+      ph.confidenceTips.forEach(tip=>html.push(`<div class="confidence-tip"><p>${tip}</p></div>`));
+      
+      // Quiz
+      const q = ph.quiz;
+      const opts = q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerPhaseQuiz('${ph.id}',${i})">${i+1}. ${o}</button>`).join('');
+      html.push(`<div class="card" style="--c:${ph.color};margin-top:16px">
+        <h3>📝 Phase Quiz</h3>
+        <p><b>Q:</b> ${q.q}</p>
+        <p class="urdu" style="color:var(--text-muted);margin:6px 0 16px">${q.uq}</p>
+        <div id="phase-quiz-opts">${opts}</div>
+        <div id="phase-quiz-result"></div>
+      </div>`);
+      
+      document.getElementById('phase-content').innerHTML=html.join('');
+      go('phase');
+    }
+
+    /* ============ QUIZ ============ */
+    let phaseQuiz=null;
+    function answerPhaseQuiz(phId, i){
+      const ph = PHASES.find(p=>p.id===phId);
+      if(phaseQuiz && phaseQuiz.phId!==phId) return;
+      phaseQuiz={phId, q:ph.quiz, answered:true};
+      const opts=document.querySelectorAll('#phase-quiz-opts .quiz-opt');
+      opts.forEach(o=>o.style.pointerEvents='none');
+      const correct = ph.quiz.a;
+      if(i===correct){
+        opts[i].classList.add('correct');
+        document.getElementById('phase-quiz-result').innerHTML=`
+          <p style="color:var(--success);font-weight:bold;margin-top:12px">✅ Correct! <span class="urdu">بالکل درست!</span></p>
+          <p>Phase marked complete. <span class="urdu">مرحلہ مکمل ہو گیا۔</span></p>
+          <button class="btn success" onclick="completePhase()">Continue ➤</button>`;
+        if(!progress[phaseQuiz.phId]) progress[phaseQuiz.phId]={};
+        progress[phaseQuiz.phId].done=true; saveProg();
+      } else {
+        opts[i].classList.add('wrong');
+        opts[correct].classList.add('correct');
+        document.getElementById('phase-quiz-result').innerHTML=`
+          <p style="color:var(--danger);font-weight:bold;margin-top:12px">❌ Not quite. <span class="urdu">غلط — دوبارہ کوشش کریں!</span></p>
+          <button class="btn accent" onclick="location.reload()">🔄 Try Again</button>`;
+      }
+    }
+    function completePhase(){
+      if(currentPhase){
+        const idx=PHASES.indexOf(currentPhase);
+        const next=PHASES[idx+1];
+        if(next){ openPhase(next.id); }
+        else { go('roadmap'); }
+      } else go('roadmap');
+    }
+    function togglePractice(phId, idx, checked){
+      const key = phId+'-practice-'+idx;
+      if(!progress[key]) progress[key]={};
+      progress[key].done = checked;
+      saveProg();
+      renderProgress();
+    }
+    function toggleLesson(phId, lessonId, checked){
+      const key = phId+'-lesson-'+lessonId;
+      if(!progress[key]) progress[key]={};
+      progress[key].done = checked;
+      saveProg();
+      renderProgress();
+    }
+
+    /* ============ PROGRESS ============ */
+    function renderProgress(){
+      let totalDone=0, totalResources=0;
+      const stats=[];
+      PHASES.forEach(ph=>{
+        let done=0;
+        if (ph.mathLessons) {
+          // Phase 2: count math lessons + resources
+          done = ph.mathLessons.filter(l => progress[ph.id+'-lesson-'+l.id] && progress[ph.id+'-lesson-'+l.id].done).length;
+          done += ph.resources.filter(r => progress[ph.id+'-'+r.title] && progress[ph.id+'-'+r.title].done).length;
+          totalResources += ph.mathLessons.length + ph.resources.length;
+        } else {
+          done = ph.resources.filter(r => progress[ph.id+'-'+r.title] && progress[ph.id+'-'+r.title].done).length;
+          totalResources += ph.resources.length;
+        }
+        totalDone += done;
+        stats.push(`<div class="stat" style="background:${ph.color}">${ph.icon} ${ph.name.split(':')[1].trim()}<br><b style="font-size:24px">${done}/${ph.mathLessons ? (ph.mathLessons.length + ph.resources.length) : ph.resources.length}</b><br><small class="urdu">${ph.urdu.split(':')[1].trim()}</small></div>`);
+      });
+      const pct=Math.round(totalDone/totalResources*100);
+      document.getElementById('overall-bar').style.width=pct+'%';
+      document.getElementById('overall-bar').textContent=pct+'%';
+      document.getElementById('overall-label').innerHTML=`Overall Progress — ${totalDone}/${totalResources} items <span class="urdu" style="font-size:14px">(${pct}٪ مکمل)</span>`;
+      document.getElementById('progress-stats').innerHTML=stats.join('');
+      
+      const ach=[];
+      if(totalDone>=1) ach.push(['🌱','First Steps — پہلا وسائل مکمل!']);
+      if(totalDone>=5) ach.push(['📗','Momentum Builder — 5 resources done']);
+      if(totalDone>=10) ach.push(['🔥','On Fire — 10 resources done']);
+      if(totalDone>=15) ach.push(['🌟','Rising Star — 15 resources done']);
+      if(totalDone>=20) ach.push(['🏆','ML FOUNDATIONS COMPLETE — مبارک ہو!']);
+      if(totalDone>=25) ach.push(['🧠','DEEP LEARNING READY — شاندار!']);
+      if(totalDone>=30) ach.push(['✨','GENAI MASTER — لا جواب!']);
+      document.getElementById('achievements').innerHTML = ach.length
+        ? ach.map(a=>`<p style="padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.1)"><b>${a[0]} ${a[1]}</b></p>`).join('')
+        : '<p style="color:var(--text-muted)">Complete your first resource to earn badges! <span class="urdu">پہلا وسائل مکمل کریں۔</span></p>';
+    }
+    function resetProgress(){
+      if(confirm('Reset all progress? / کیا تمام پیش رفت مٹا دیں؟')){
+        progress={}; saveProg(); renderProgress();
+      }
+    }
+
+    /* ============ AI TUTOR ============ */
+    const KNOWLEDGE = [
+      {keys:['python','پایتھون','variable','variables','type','types'], ans:`<b>Python Variables</b> — Think of variables as labeled boxes.
+       <br><b>x = 5</b> → box labeled "x" contains number 5
+       <br><b>name = "Ahmed"</b> → box labeled "name" contains text "Ahmed"
+       <br><b>Types:</b> <code>int</code> (numbers), <code>float</code> (decimals), <code>str</code> (text), <code>bool</code> (True/False), <code>list</code> (ordered collection), <code>dict</code> (key-value pairs)
+       <br><span class="urdu">ممتاز — variables کو ڈبے سمجھو جن پر لیبل لگا ہو۔</span>`},
+      {keys:['derivative','تفریق','calculus','کيلکلس','gradient','gradients'], ans:`<b>Derivative</b> — Measures how fast something changes at a specific point.
+       <br>Think: speed = derivative of position. Slope of tangent line.
+       <br><b>x² → 2x</b> (power rule: bring down exponent, subtract 1)
+       <br><b>Chain rule:</b> derivative of f(g(x)) = f'(g(x)) · g'(x) — for nested functions
+       <br><b>Gradient:</b> vector of partial derivatives — points in direction of steepest increase
+       <br><span class="urdu">تفریق = تبدیلی کی رفتار۔agradaient = سب سے تیز اوپر جانے کی سمت۔</span>`},
+      {keys:['neural','network','neural network','نیورل','network','نیٹورک'], ans:`<b>Neural Network</b> — Function approximator inspired by brain neurons.
+       <br><b>Input → Hidden Layers → Output</b>
+       <br>Each neuron: <b>weighted sum + bias → activation function</b>
+       <br><b>Activation:</b> ReLU (max(0,x)), Sigmoid, Tanh — adds non-linearity
+       <br><b>Training:</b> Forward pass → Loss → Backprop (chain rule!) → Update weights (gradient descent)
+       <br><span class="urdu">نیورل نیٹورک = وغیرہ فنکشن جو ڈیٹا سے سیکھتا ہے۔</span>`},
+      {keys:['pytorch','پائی ٹورچ','tensor','autograd'], ans:`<b>PyTorch Basics</b>
+       <br><b>Tensor:</b> Multi-dimensional array (like NumPy but GPU-ready) — <code>torch.tensor([1,2,3])</code>
+       <br><b>Autograd:</b> Automatic differentiation — <code>x.requires_grad_(True)</code> tracks operations
+       <br><b>Training loop:</b> Forward → Loss → <code>loss.backward()</code> → <code>optimizer.step()</code>
+       <br><b>Key modules:</b> <code>nn.Linear</code>, <code>nn.Conv2d</code>, <code>nn.LSTM</code>, <code>optim.Adam</code>, <code>nn.CrossEntropyLoss</code>
+       <br><span class="urdu">PyTorch = Python + Tensors + Automatic Gradients۔</span>`},
+      {keys:['transformer','attention','self-attention','llm','large language model','بڑا زبان کا ماڈل'], ans:`<b>Transformer</b> — Architecture behind all modern LLMs (GPT, BERT, LLaMA).
+       <br><b>Self-Attention:</b> Every token looks at all other tokens — computes relevance
+       <br><b>Q, K, V:</b> Query, Key, Value — dot product attention: softmax(QKᵀ/√d)V
+       <br><b>LLM Training:</b> Pre-train (predict next token on massive text) → Fine-tune (instruction/RLHF)
+       <br><b>RAG:</b> Retrieval-Augmented Generation — retrieve relevant docs → inject into prompt → generate
+       <br><span class="urdu">Transformer = Attention mechanism جو سياق سمجھتا ہے۔</span>`},
+      {keys:['prompt','prompt engineering','پرامپٹ','پرامپٹ انجینئرنگ'], ans:`<b>Prompt Engineering</b> — Clear instructions for LLMs.
+       <br><b>Structure:</b> Role + Context + Task + Format + Examples
+       <br><b>Example:</b> "You are a Python tutor. Explain decorators to a beginner. Use simple analogies. Show 2 code examples."
+       <br><b>Techniques:</b> Few-shot (examples), Chain-of-thought (reasoning steps), Role prompting
+       <br><span class="urdu">پرامپٹ انجینئرنگ = واضح ہدایات دینا تاکہ ماڈل بہتر جواب دے۔</span>`},
+      {keys:['stuck','stuck','frustrated','hopeless','ڈھانپ','نیراش','مشکل'], ans:`<div class="confidence-tip" style="margin:0">
+        <h4>💪 You're Not Alone — Every Developer Feels This</h4>
+        <p><b>Normalize the struggle:</b> The confusion IS the learning. If it felt easy, you wouldn't be growing.</p>
+        <p><b>Micro-steps:</b> Break it down until it feels trivial. One function. One line. One concept.</p>
+        <p><b>Ask your AI Coach:</b> "Explain X like I'm 15" or "Give me a simpler analogy for Y"</p>
+        <p><b>Sleep on it:</b> Brain consolidates learning during sleep. Come back tomorrow.</p>
+        <p><b>Track wins:</b> Look at Progress tab — see how far you've come!</p>
+      </div>`},
+      {keys:['confidence','اعتماد','imposter','imposter syndrome','دھوکہ'], ans:`<div class="confidence-tip" style="margin:0">
+        <h4>💪 Imposter Syndrome is a Sign of Growth</h4>
+        <p>Feeling like a fraud means you're aware of how much there is to know — that's wisdom, not weakness.</p>
+        <p><b>Reframe:</b> "I don't know this YET" not "I can't learn this"</p>
+        <p><b>Evidence:</b> Check your Progress tab — count the ✅ marks. That's proof.</p>
+        <p><b>Teach it:</b> Explain a concept to AI Coach or write a note. Teaching = mastery.</p>
+      </div>`}
+    ];
+    function aiAnswer(q){
+      const ql=q.toLowerCase();
+      for(const k of KNOWLEDGE){ if(k.keys.some(key=>ql.includes(key.toLowerCase()))) return k.ans; }
+      return `Great question! Here's how to approach it:
+      • Check the phase resources for structured learning
+      • Try asking with a specific term: "Python lists", "PyTorch tensors", "Transformer attention"
+      • For math: Khan Academy + 3Blue1Brown videos are gold
+      • For coding: Type it, break it, fix it, understand it
+      <span class="urdu">اچھا سوال! مخصوص اصطلاح کے ساتھ پوچھو — "Python lists"، "PyTorch tensors"۔</span>`;
+    }
+    function quickAsk(q){ document.getElementById('chat-in').value=q; sendMsg(); }
+    function sendMsg(){
+      const inp=document.getElementById('chat-in'); const q=inp.value.trim(); if(!q) return;
+      inp.value='';
+      const log=document.getElementById('chat-log');
+      log.innerHTML+=`<div class="msg user">${q}</div>`;
+      setTimeout(()=>{
+        log.innerHTML+=`<div class="msg bot">${aiAnswer(q)}</div>`;
+        log.scrollTop=log.scrollHeight;
+      },400);
+      log.scrollTop=log.scrollHeight;
+    }
+
+    /* init */
+    go('home');
+  </script>
+</body>
+</html>
