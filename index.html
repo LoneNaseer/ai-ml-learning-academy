@@ -507,18 +507,21 @@
   }
   .progress-step.completed { border-color: var(--accent); background: var(--accent-bg); }
   .progress-step.in-progress { border-color: var(--warning); background: var(--warning-bg); }
+  .progress-step.available { border-color: var(--info); background: var(--info-bg); }
   .step-icon {
     width: 36px; height: 36px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
   }
   .step-icon.completed { background: var(--accent); color: var(--bg); }
   .step-icon.in-progress { background: var(--warning); color: var(--bg); }
+  .step-icon.available { background: var(--info); color: var(--bg); }
   .step-icon.pending { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); }
   .step-info { flex: 1; }
   .step-name { font-weight: 600; color: var(--text); font-size: 0.9rem; }
   .step-status { font-size: 0.75rem; color: var(--text-muted); }
   .progress-step.completed .step-status { color: var(--accent); }
   .progress-step.in-progress .step-status { color: var(--warning); }
+  .progress-step.available .step-status { color: var(--info); }
   
   /* AI Assistant */
   .ai-assistant {
@@ -1238,17 +1241,18 @@
       $('#totalHours').textContent = totalHours;
       $('#overallProgress').style.width = overallPct + '%';
       
-      // Render steps
+      // Render steps - ALL PHASES UNLOCKED FROM START
       const stepsContainer = $('#progressSteps');
       stepsContainer.innerHTML = steps.map((s, i) => {
         const isDone = s.done === s.total && s.total > 0;
-        const isCurrent = !isDone && steps.slice(0,i).every(x => x.done === x.total && x.total > 0);
+        const isCurrent = !isDone && (i === 0 || steps.slice(0,i).some(x => x.done > 0)); // First phase always available, others available if any previous progress
+        const isAvailable = !isDone && !isCurrent;
         return `
-          <article class="progress-step ${isDone?'completed':''} ${isCurrent?'in-progress':''}">
-            <div class="step-icon ${isDone?'completed':''} ${isCurrent?'in-progress':''}">${isDone?'✓':isCurrent?'→':i+1}</div>
+          <article class="progress-step ${isDone?'completed':''} ${isCurrent?'in-progress':''} ${isAvailable?'available':''}">
+            <div class="step-icon ${isDone?'completed':''} ${isCurrent?'in-progress':''} ${isAvailable?'available':''}">${isDone?'✓':isCurrent?'→':isAvailable?'○':i+1}</div>
             <div class="step-info">
               <div class="step-name">${s.phase.icon} ${s.phase.name.split(':')[1]?.trim() || s.phase.name}</div>
-              <div class="step-status">${s.done}/${s.total} resources · ${isDone?'Complete':isCurrent?'In Progress':'Locked'}</div>
+              <div class="step-status">${s.done}/${s.total} resources · ${isDone?'Complete':isCurrent?'In Progress':'Available'}</div>
             </div>
           </article>
         `;
