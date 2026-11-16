@@ -112,34 +112,241 @@
   }
   .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
   
-  /* Hero */
+  /* ============ IMMERSIVE HERO - DIGITAL WORLD PORTAL ============ */
   .hero {
-    padding: 80px 0 60px; text-align: center; position: relative; overflow: hidden;
+    min-height: 100vh; padding: 0; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
   }
   .hero::before {
-    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(ellipse at 30% 20%, var(--accent-bg) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, var(--purple-bg) 0%, transparent 50%);
-    pointer-events: none;
+    content: ''; position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse at 50% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 20%, rgba(184, 119, 255, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(255, 184, 0, 0.05) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 50%, var(--bg) 100%);
+    z-index: 0;
   }
-  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--accent-bg); border: 1px solid var(--accent);
-    color: var(--accent); padding: 8px 18px; border-radius: 100px;
-    font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+  .hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    animation: gridMove 20s linear infinite;
+    z-index: 1;
   }
-  .hero h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.15;
-    margin-bottom: 20px; background: linear-gradient(135deg, var(--text), var(--accent), var(--purple));
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(60px, 60px); }
+  }
+  
+  /* Floating particles */
+  .particle-field {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  }
+  .particle {
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    animation: floatParticle 15s infinite ease-in-out;
+  }
+  @keyframes floatParticle {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+    25% { transform: translateY(-100px) translateX(30px) scale(1.2); opacity: 0.8; }
+    50% { transform: translateY(-50px) translateX(-20px) scale(0.8); opacity: 0.5; }
+    75% { transform: translateY(-150px) translateX(10px) scale(1.1); opacity: 0.6; }
+  }
+  
+  /* Portal Ring */
+  .portal-ring {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px; z-index: 5;
+    animation: portalRotate 30s linear infinite, portalPulse 3s ease-in-out infinite;
+  }
+  @keyframes portalRotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  @keyframes portalPulse { 0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); } }
+  .portal-ring svg { width: 100%; height: 100%; }
+  
+  /* The Traveler - Common Man */
+  .traveler {
+    position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; flex-direction: column; align-items: center;
+    animation: travelerEnter 2s ease-out forwards, travelerBreathe 4s ease-in-out infinite;
+  }
+  @keyframes travelerEnter {
+    0% { opacity: 0; transform: translateX(-50%) translateY(100px) scale(0.8); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  }
+  @keyframes travelerBreathe {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+  .traveler-figure {
+    width: 120px; height: 200px; position: relative;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+  }
+  .traveler-silhouette {
+    width: 100%; height: 100%; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%);
+    border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+    position: relative; overflow: hidden;
+  }
+  .traveler-silhouette::before {
+    content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    box-shadow: 0 0 30px var(--accent), 0 0 60px var(--purple);
+    animation: coreGlow 2s ease-in-out infinite;
+  }
+  @keyframes coreGlow { 0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+  .traveler-silhouette::after {
+    content: ''; position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 4px; background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    border-radius: 2px; animation: stepGlow 1s ease-in-out infinite;
+  }
+  @keyframes stepGlow { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  
+  .traveler-backpack {
+    position: absolute; right: -20px; top: 30%; width: 40px; height: 60px;
+    background: linear-gradient(135deg, var(--warning), #ff8c00);
+    border-radius: 8px 0 0 8px; box-shadow: -5px 0 20px rgba(255,184,0,0.3);
+  }
+  .traveler-backpack::before {
+    content: '📚'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 1.2rem; animation: bookFloat 2s ease-in-out infinite;
+  }
+  @keyframes bookFloat { 0%, 100% { transform: translate(-50%, -50%) rotate(-5deg); } 50% { transform: translate(-50%, -50%) rotate(5deg); } }
+  
+  /* Digital World Expanding - Course Orbs */
+  .digital-world {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  }
+  .course-orb {
+    position: absolute; width: 120px; height: 120px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 16px; cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: orbFloat 6s ease-in-out infinite, orbEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0; transform: scale(0) translateY(200px);
+  }
+  .course-orb:hover {
+    transform: scale(1.3) translateY(-20px) !important;
+    z-index: 20; box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 60px var(--orb-color);
+  }
+  .course-orb .orb-glow {
+    position: absolute; inset: -20px; border-radius: 50%;
+    background: radial-gradient(circle, var(--orb-color) 0%, transparent 70%);
+    opacity: 0.3; filter: blur(20px); animation: glowPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.5; } }
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(2deg); }
+    50% { transform: translateY(10px) rotate(-1deg); }
+    75% { transform: translateY(-5px) rotate(1deg); }
+  }
+  @keyframes orbEntrance {
+    0% { opacity: 0; transform: scale(0.1) translateY(300px) rotate(-180deg); }
+    60% { opacity: 1; transform: scale(1.1) translateY(-20px) rotate(10deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+  }
+  .course-orb .orb-icon { font-size: 2.5rem; margin-bottom: 8px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); }
+  .course-orb .orb-title { font-weight: 700; font-size: 0.85rem; color: var(--text); text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+  .course-orb .orb-duration { font-size: 0.7rem; color: var(--text-dim); opacity: 0.8; }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; flex-direction: column; align-items: center;
+    gap: 8px; color: var(--text-dim); font-size: 0.8rem;
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(12px); } }
+  .scroll-mouse {
+    width: 26px; height: 42px; border: 2px solid var(--border); border-radius: 13px;
+    display: flex; justify-content: center; padding-top: 8px;
+  }
+  .scroll-wheel { width: 4px; height: 8px; background: var(--accent); border-radius: 2px; animation: wheelScroll 1.5s ease-in-out infinite; }
+  @keyframes wheelScroll { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(16px); opacity: 0; } }
+  
+  /* Journey Path - Floating Course Cards */
+  .journey-path {
+    position: relative; z-index: 5; padding-top: 100vh; padding-bottom: 80px;
+  }
+  .journey-title {
+    text-align: center; margin-bottom: 48px; padding: 0 24px;
+  }
+  .journey-title h2 {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800; background: linear-gradient(135deg, var(--text), var(--accent), var(--purple));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  .hero p {
-    font-size: clamp(1.1rem, 2.5vw, 1.35rem); color: var(--text-dim);
-    max-width: 640px; margin: 0 auto 32px; line-height: 1.7;
+  .journey-subtitle { color: var(--text-dim); margin-top: 12px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  
+  .journey-steps {
+    display: flex; flex-direction: column; gap: 32px; max-width: 1000px; margin: 0 auto; padding: 0 24px;
   }
-  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .journey-step {
+    display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start;
+    padding: 32px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); position: relative; overflow: hidden;
+    transition: var(--transition); opacity: 0; transform: translateX(-50px);
+    animation: stepReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes stepReveal {
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .journey-step::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, var(--step-color), var(--purple));
+  }
+  .step-number {
+    font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 800;
+    color: var(--step-color); opacity: 0.15; line-height: 1; margin-bottom: -20px;
+    writing-mode: vertical-rl; text-orientation: mixed;
+  }
+  .step-content { padding-left: 16px; }
+  .step-icon { width: 60px; height: 60px; border-radius: 14px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .step-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { color: var(--text-dim); margin-bottom: 20px; line-height: 1.7; }
+  .step-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .step-btn { 
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; background: var(--step-bg); color: var(--step-color);
+    border: 1px solid var(--step-color); border-radius: 8px; font-weight: 600;
+    text-decoration: none; transition: var(--transition);
+  }
+  .step-btn:hover { background: var(--step-color); color: var(--bg); }
+  
+  /* Floating Data Streams */
+  .data-streams {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+    overflow: hidden;
+  }
+  .data-stream {
+    position: absolute; width: 2px; height: 100vh;
+    background: linear-gradient(180deg, transparent, var(--accent), transparent);
+    opacity: 0.1; animation: streamFlow 8s linear infinite;
+  }
+  @keyframes streamFlow {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    10% { opacity: 0.1; }
+    90% { opacity: 0.1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+  
+  /* Hide original sections on home */
+  .home #progress, .home #roadmap, .home #resources, .home #ai { display: none; }
+  .home .stats-bar { display: none; }
+  
+  /* Responsive for Hero */
+  @media (max-width: 768px) {
+    .traveler-figure { width: 80px; height: 140px; }
+    .course-orb { width: 90px; height: 90px; padding: 12px; }
+    .course-orb .orb-icon { font-size: 2rem; }
+    .course-orb .orb-title { font-size: 0.75rem; }
+    .journey-step { grid-template-columns: 1fr; padding: 24px; }
+    .step-number { writing-mode: horizontal-tb; font-size: 2rem; margin-bottom: 8px; opacity: 0.1; }
+    .step-content { padding-left: 0; }
+    .journey-step::before { left: 20px; width: 3px; }
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 14px 28px; border-radius: 10px; border: none;
@@ -414,44 +621,93 @@
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-content">
-        <span class="hero-badge animate-in">🎓 Free • Self-Paced • No Gatekeeping</span>
-        <h1 class="animate-in delay-1">AI/ML Learning Academy</h1>
-        <p class="animate-in delay-2">Your free, self-paced path from zero to AI mastery. No prerequisites, no paywalls, no gatekeeping. Just clear steps, free tools, and a community that helps.</p>
-        <div class="hero-actions animate-in delay-3">
-          <a href="#roadmap" class="btn btn-primary">Start Learning →</a>
-          <a href="#resources" class="btn btn-secondary">Browse Resources</a>
-          <a href="#progress" class="btn btn-ghost">Track Progress</a>
+    <!-- ============ IMMERSIVE HERO - DIGITAL WORLD PORTAL ============ -->
+    <section class="hero" id="home">
+      <!-- Data Streams Background -->
+      <div class="data-streams" id="dataStreams"></div>
+      
+      <!-- Portal Ring -->
+      <div class="portal-ring">
+        <svg viewBox="0 0 300 300">
+          <defs>
+            <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00d4aa"/>
+              <stop offset="50%" stop-color="#b877ff"/>
+              <stop offset="100%" stop-color="#ffb800"/>
+            </linearGradient>
+          </defs>
+          <circle cx="150" cy="150" r="130" fill="none" stroke="url(#ringGradient)" stroke-width="3" stroke-dasharray="30 15" opacity="0.6"/>
+          <circle cx="150" cy="150" r="110" fill="none" stroke="url(#ringGradient)" stroke-width="2" stroke-dasharray="20 10" opacity="0.4"/>
+          <circle cx="150" cy="150" r="90" fill="none" stroke="url(#ringGradient)" stroke-width="1" stroke-dasharray="15 10" opacity="0.3"/>
+          <circle cx="150" cy="150" r="60" fill="none" stroke="url(#ringGradient)" stroke-width="1" stroke-dasharray="8 8" opacity="0.2"/>
+        </svg>
+      </div>
+      
+      <!-- Particle Field -->
+      <div class="particle-field" id="particleField"></div>
+      
+      <!-- The Traveler - Common Man -->
+      <div class="traveler">
+        <div class="traveler-figure">
+          <div class="traveler-silhouette">
+            <div class="traveler-backpack"></div>
+          </div>
+        </div>
+        <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 12px; text-align: center; max-width: 200px;">A curious mind enters the digital world...</p>
+      </div>
+      
+      <!-- Course Orbs - Digital World -->
+      <div class="digital-world" id="courseOrbs">
+        <!-- Orbs will be generated by JS -->
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <span>Begin Your Journey</span>
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+      </div>
+      
+      <!-- Journey Path - Floating Course Cards -->
+      <div class="journey-path" id="journeyPath"></div>
+      
+      <!-- Data Streams Background -->
+      <div class="data-streams" id="dataStreams"></div>
+    </section>
+
+    <!-- Journey Path Section (replaces roadmap on home) -->
+    <section class="journey-path-section" style="display: none;">
+      <div class="container">
+        <header class="section-header animate-in">
+          <span class="section-tag">Your Learning Path</span>
+          <h2 class="section-title">Five Phases to AI Mastery</h2>
+          <p class="section-desc">All phases are unlocked from day one. Start anywhere, move at your pace. Each phase builds on the last, but you choose your adventure.</p>
+        </header>
+        <div class="phases-grid" id="phasesGrid"></div>
+      </div>
+    </section>
+
+    <!-- All Resources Section -->
+    <section id="resources" style="display: none;">
+      <div class="container">
+        <header class="section-header animate-in">
+          <span class="section-tag">Free Learning Library</span>
+          <h2 class="section-title">Curated Free Resources</h2>
+          <p class="section-desc">Every resource here is free, high-quality, and chosen for beginners. Filter by type or phase.</p>
+        </header>
+        <div class="resources-section animate-in">
+          <div class="resources-header">
+            <h3 class="resources-title">All Resources</h3>
+            <div class="resource-filters" id="resourceFilters"></div>
+          </div>
+          <div class="resources-grid" id="resourcesGrid"></div>
         </div>
       </div>
     </section>
 
-    <!-- Stats Bar -->
-    <div class="container">
-      <div class="stats-bar">
-        <div class="stat-item animate-in delay-1">
-          <div class="stat-value" data-count="5">0</div>
-          <div class="stat-label">Learning Phases</div>
-        </div>
-        <div class="stat-item animate-in delay-2">
-          <div class="stat-value" data-count="50">0</div>
-          <div class="stat-label">Free Resources</div>
-        </div>
-        <div class="stat-item animate-in delay-3">
-          <div class="stat-value" data-count="13">0</div>
-          <div class="stat-label">Math Lessons</div>
-        </div>
-        <div class="stat-item animate-in delay-4">
-          <div class="stat-value" data-count="100">0</div>
-          <div class="stat-label">% Free</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Progress Tracker -->
-    <section id="progress">
+    <section id="progress" style="display: none;">
       <div class="container">
         <div class="progress-tracker animate-in">
           <div class="tracker-header">
@@ -480,7 +736,7 @@
     </section>
 
     <!-- Roadmap / Phases -->
-    <section id="roadmap">
+    <section id="roadmap" style="display: none;">
       <div class="container">
         <header class="section-header animate-in">
           <span class="section-tag">Your Learning Path</span>
@@ -488,6 +744,45 @@
           <p class="section-desc">All phases are unlocked from day one. Start anywhere, move at your pace. Each phase builds on the last, but you choose your adventure.</p>
         </header>
         <div class="phases-grid" id="phasesGrid"></div>
+      </div>
+    </section>
+
+    <!-- All Resources -->
+    <section id="resources-full" style="display: none;">
+      <div class="container">
+        <header class="section-header animate-in">
+          <span class="section-tag">Free Learning Library</span>
+          <h2 class="section-title">Curated Free Resources</h2>
+          <p class="section-desc">Every resource here is free, high-quality, and chosen for beginners. Filter by type or phase.</p>
+        </header>
+        <div class="resources-section animate-in">
+          <div class="resources-header">
+            <h3 class="resources-title">All Resources</h3>
+            <div class="resource-filters" id="resourceFilters"></div>
+          </div>
+          <div class="resources-grid" id="resourcesGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section id="ai" style="display: none;">
+      <div class="container">
+        <div class="ai-assistant animate-in">
+          <div class="ai-header">
+            <div class="ai-avatar">🤖</div>
+            <div>
+              <div class="ai-title">AI Learning Coach</div>
+              <div class="ai-subtitle">Ask anything — no question too basic. I explain in plain English.</div>
+            </div>
+          </div>
+          <div class="ai-suggestions" id="aiSuggestions"></div>
+          <div class="chat-input-group">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything... (e.g., 'What is a derivative?' or 'How do I install Python?')" placeholder="Ask me anything...">
+            <button class="btn btn-primary" id="sendChat">Send</button>
+          </div>
+          <div class="chat-log" id="chatLog"></div>
+        </div>
       </div>
     </section>
 
@@ -585,6 +880,7 @@
 
   <script>
     /* ============ DATA ============ */
+    const resourceIcons = { course: '🎓', video: '🎬', book: '📖', practice: '🛠️', reference: '📚' };
     const PHASES = [
       {
         id: 'phase1', name: 'Python Foundations', icon: '🐍',
@@ -1246,6 +1542,13 @@
       $('#sendChat').onclick = sendChatHandler;
       $('#chatInput').onkeydown = (e) => { if(e.key === 'Enter') sendChatHandler(); };
 
+      // ============ IMMERSIVE HERO INITIALIZATION ============
+      initParticleField();
+      initCourseOrbs();
+      initDataStreams();
+      initJourneySteps();
+      initScrollIndicator();
+      
       // Initial render
       renderPhases();
       renderResources();
@@ -1254,6 +1557,128 @@
 
       // Show home by default
       showTab('home');
+    }
+
+    // ============ IMMERSIVE HERO FUNCTIONS ============
+    function initParticleField() {
+      const field = $('#particleField');
+      if (!field) return;
+      const colors = ['var(--accent)', 'var(--purple)', 'var(--warning)', 'var(--info)'];
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        particle.style.width = particle.style.height = (2 + Math.random() * 4) + 'px';
+        field.appendChild(particle);
+      }
+    }
+
+    function initCourseOrbs() {
+      const container = $('#courseOrbs');
+      if (!container) return;
+      
+      const orbData = [
+        { id: 'python', title: 'Python', duration: '3-4 wks', color: '#6366f1', bg: 'rgba(99,102,241,0.2)', icon: '🐍', delay: 0 },
+        { id: 'math', title: 'Math for ML', duration: '4-6 wks', color: '#06b6d4', bg: 'rgba(6,182,212,0.2)', icon: '📐', delay: 100 },
+        { id: 'ml', title: 'ML Basics', duration: '4-6 wks', color: '#10b981', bg: 'rgba(16,185,129,0.2)', icon: '🤖', delay: 200 },
+        { id: 'dl', title: 'Deep Learning', duration: '6-8 wks', color: '#ec4899', bg: 'rgba(236,72,153,0.2)', icon: '🧠', delay: 300 },
+        { id: 'genai', title: 'GenAI & LLMs', duration: '4-6 wks', color: '#f59e0b', bg: 'rgba(245,158,11,0.2)', icon: '✨', delay: 400 },
+      ];
+
+      // Positions around the traveler
+      const positions = [
+        { left: '15%', top: '20%' },
+        { right: '15%', top: '25%' },
+        { left: '10%', bottom: '25%' },
+        { right: '10%', bottom: '20%' },
+        { left: '50%', bottom: '5%', transform: 'translateX(-50%)' },
+      ];
+
+      orbData.forEach((orb, i) => {
+        const pos = positions[i];
+        const orbEl = document.createElement('div');
+        orbEl.className = 'course-orb';
+        orbEl.style.setProperty('--orb-color', orb.color);
+        orbEl.style.left = pos.left || 'auto';
+        orbEl.style.right = pos.right || 'auto';
+        orbEl.style.top = pos.top || 'auto';
+        orbEl.style.bottom = pos.bottom || 'auto';
+        if (pos.transform) orbEl.style.transform = pos.transform;
+        orbEl.style.animationDelay = orb.delay + 'ms';
+        orbEl.innerHTML = `
+          <div class="orb-glow"></div>
+          <span class="orb-icon">${orb.icon}</span>
+          <span class="orb-title">${orb.title}</span>
+          <span class="orb-duration">${orb.duration}</span>
+        `;
+        orbEl.onclick = () => openPhaseModal(orb.id.replace('genai', 'phase5').replace('dl', 'phase4').replace('ml', 'phase3').replace('math', 'phase2').replace('python', 'phase1'));
+        container.appendChild(orbEl);
+      });
+    }
+
+    function initDataStreams() {
+      const container = $('#dataStreams');
+      if (!container) return;
+      const colors = ['var(--accent)', 'var(--purple)', 'var(--warning)', 'var(--info)'];
+      for (let i = 0; i < 12; i++) {
+        const stream = document.createElement('div');
+        stream.className = 'data-stream';
+        stream.style.left = (i * 8.33 + Math.random() * 4) + '%';
+        stream.style.background = `linear-gradient(180deg, transparent, ${colors[i % colors.length]}, transparent)`;
+        stream.style.animationDelay = (i * 0.6) + 's';
+        stream.style.width = '1px';
+        container.appendChild(stream);
+      }
+    }
+
+    function initJourneySteps() {
+      const container = $('#journeyPath');
+      if (!container) return;
+      
+      const journeyData = [
+        { phase: PHASES[0], stepColor: '#6366f1', stepBg: 'rgba(99,102,241,0.15)', stepIcon: '🐍', delay: 0 },
+        { phase: PHASES[1], stepColor: '#06b6d4', stepBg: 'rgba(6,182,212,0.15)', stepIcon: '📐', delay: 100 },
+        { phase: PHASES[2], stepColor: '#10b981', stepBg: 'rgba(16,185,129,0.15)', stepIcon: '🤖', delay: 200 },
+        { phase: PHASES[3], stepColor: '#ec4899', stepBg: 'rgba(236,72,153,0.15)', stepIcon: '🧠', delay: 300 },
+        { phase: PHASES[4], stepColor: '#f59e0b', stepBg: 'rgba(245,158,11,0.15)', stepIcon: '✨', delay: 400 },
+      ];
+
+      container.innerHTML = journeyData.map((step, i) => `
+        <article class="journey-step animate-in" style="--step-color: ${step.stepColor}; --step-bg: ${step.stepBg};" data-phase="${step.phase.id}" style="animation-delay: ${step.delay}ms;">
+          <div class="step-number">${step.stepIcon}</div>
+          <div class="step-content">
+            <div class="step-icon" style="background: ${step.stepBg}; color: ${step.stepColor};">${step.stepIcon}</div>
+            <h3 class="step-title">${step.phase.name}</h3>
+            <p class="step-desc">${step.phase.desc}</p>
+            <div class="step-topics">
+              ${step.phase.topics.slice(0, 4).map(t => `<span class="topic-tag">${t}</span>`).join('')}
+            </div>
+            <a href="#" class="step-btn" onclick="event.preventDefault(); openPhaseModal('${step.phase.id}')">
+              Explore Phase ${i+1} →
+            </a>
+          </div>
+        `).join('');
+      container.querySelectorAll('.journey-step').forEach((step, i) => {
+        step.style.animationDelay = journeyData[i].delay + 'ms';
+      });
+    }
+
+    function initScrollIndicator() {
+      const indicator = document.querySelector('.scroll-indicator');
+      if (!indicator) return;
+      
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        indicator.style.opacity = window.scrollY > 100 ? '0' : '1';
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          indicator.style.opacity = window.scrollY > 100 ? '0' : '1';
+        }, 500);
+      });
     }
 
     // Start
