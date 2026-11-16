@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Arabic Mastery Academy | Learn Arabic with Naseer Ahmad Lone</title>
+<meta name='description' content='Arabic Mastery Academy - Learn Arabic from Zero to Master with Quranic examples, AI Tutor, and Islamic guidance. Created by Naseer Ahmad Lone.'>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #1a5c3d;
+    --primary-light: #2e7d4a;
+    --secondary: #c9a84c;
+    --accent: #e86c1a;
+    --bg-gradient-start: #0f172a;
+    --bg-gradient-mid: #1e3a5f;
+    --bg-gradient-end: #2d1b4e;
+    --card-bg: rgba(255,255,255,0.08);
+    --card-border: rgba(255,255,255,0.15);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --success: #22c55e;
+    --warning: #fbbf24;
+    --danger: #ef4444;
+  }
+  body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(232,108,26,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(30,92,61,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page { display: none; min-height: 100vh; padding: 20px; animation: fadeIn 0.5s ease-out; position: relative; z-index: 1; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: none;} }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: none;} }
+  @keyframes pulse { 0%, 100% { transform: scale(1);} 50% { transform: scale(1.02);} }
+  @keyframes shimmer { 0% { background-position: -200% 0;} 100% { background-position: 200% 0;} }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-30px) rotate(5deg); } 50% { transform: translateY(20px) rotate(-3deg); } 75% { transform: translateY(-15px) rotate(2deg); } }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+  h1, h2, h3, h4 { line-height: 1.3; font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+  
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 20px 0;
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out backwards;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary-light));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    margin: 8px 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(26,92,61,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  .btn:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 24px rgba(26,92,61,0.5);
+  }
+  .btn:hover::before { left: 100%; }
+  .btn:active { transform: translateY(-1px); }
+  .btn.ghost { 
+    background: transparent; 
+    color: var(--secondary); 
+    border: 2px solid var(--secondary);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.2);
+  }
+  .btn.ghost:hover { 
+    background: var(--secondary); 
+    color: var(--bg-gradient-start); 
+    box-shadow: 0 8px 24px rgba(201,168,76,0.4);
+  }
+  .btn.accent { 
+    background: linear-gradient(135deg, var(--accent), #f59e0b); 
+    box-shadow: 0 4px 16px rgba(232,108,26,0.4);
+  }
+  .btn.accent:hover { box-shadow: 0 8px 24px rgba(232,108,26,0.5); }
+  .btn.small { padding: 10px 20px; font-size: 13px; }
+  
+  .arabic { font-family: 'Amiri', serif; font-size: 2em; direction: rtl; font-weight: 700; line-height: 2; }
+  .arabic-sm { font-family: 'Amiri', serif; font-size: 1.5em; direction: rtl; font-weight: 600; line-height: 2; }
+  .urdu { font-family: 'Noto Nastaliq Urdu', 'Jameel Noori', serif; direction: rtl; font-size: 1.25em; line-height: 2.2; }
+  .urdu-sm { font-family: 'Noto Nastaliq Urdu', 'Jameel Noori', serif; direction: rtl; font-size: 1.1em; line-height: 2; }
+  
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin: -20px -20px 20px -20px;
+  }
+  .nav button {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .nav button::after {
+    content: '';
+    position: absolute;
+    bottom: 8px; left: 50%;
+    width: 0; height: 3px;
+    background: var(--secondary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .nav button:hover { color: var(--secondary); }
+  .nav button.active { 
+    color: var(--secondary); 
+    background: rgba(201,168,76,0.1);
+  }
+  .nav button.active::after { width: 60%; }
+  
+  .progress-wrap { background: rgba(255,255,255,0.1); border-radius: 50px; height: 28px; overflow: hidden; position: relative; }
+  .progress-bar { 
+    height: 100%; 
+    background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary-light));
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+    width: 0%; 
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center; 
+    color: var(--bg-gradient-start); 
+    font-size: 13px; 
+    font-weight: 700;
+    line-height: 28px; 
+    border-radius: 50px;
+  }
+  
+  .lock { opacity: 0.6; filter: grayscale(0.5); pointer-events: none; }
+  
+  .badge { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(30,92,61,0.2));
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--secondary); 
+    padding: 6px 16px; 
+    border-radius: 50px; 
+    font-size: 13px; 
+    font-weight: 600;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .example-box { 
+    background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(22,163,74,0.05)); 
+    border-right: 4px solid var(--success); 
+    padding: 16px; 
+    border-radius: 12px; 
+    margin: 12px 0;
+    border-left: 1px solid rgba(34,197,94,0.2);
+  }
+  .quran-box { 
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(232,108,26,0.08)); 
+    border-right: 4px solid var(--secondary); 
+    padding: 18px; 
+    border-radius: 14px; 
+    margin: 14px 0;
+    border-left: 1px solid rgba(201,168,76,0.3);
+    position: relative;
+  }
+  .quran-box::before {
+    content: '📖';
+    position: absolute;
+    top: -12px; right: 20px;
+    background: var(--secondary);
+    color: var(--bg-gradient-start);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+  }
+  .hadith-box { 
+    background: linear-gradient(135deg, rgba(232,108,26,0.12), rgba(201,168,76,0.08)); 
+    border-right: 4px solid var(--accent); 
+    padding: 18px; 
+    border-radius: 14px; 
+    margin: 14px 0;
+    border-left: 1px solid rgba(232,108,26,0.3);
+    position: relative;
+  }
+  .hadith-box::before {
+    content: '📜';
+    position: absolute;
+    top: -12px; right: 20px;
+    background: var(--accent);
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(232,108,26,0.3);
+  }
+  .prayer-box {
+    background: linear-gradient(135deg, rgba(26,92,61,0.2), rgba(201,168,76,0.1));
+    border: 2px solid var(--secondary);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .prayer-box::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .prayer-box > * { position: relative; z-index: 1; }
+  
+  .hw-box { 
+    background: linear-gradient(135deg, rgba(232,108,26,0.12), rgba(245,158,11,0.08)); 
+    border-right: 4px solid var(--accent); 
+    padding: 18px; 
+    border-radius: 14px; 
+    margin: 16px 0;
+    border-left: 1px solid rgba(232,108,26,0.3);
+  }
+  
+  .quiz-opt { 
+    display: block; 
+    width: 100%; 
+    text-align: left; 
+    padding: 14px 18px; 
+    margin: 10px 0; 
+    border-radius: 14px; 
+    border: 2px solid rgba(255,255,255,0.15); 
+    background: rgba(255,255,255,0.05); 
+    cursor: pointer; 
+    font-size: 15px; 
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .quiz-opt:hover { 
+    border-color: var(--secondary); 
+    background: rgba(201,168,76,0.1);
+    transform: translateX(4px);
+  }
+  .quiz-opt.correct { 
+    border-color: var(--success); 
+    background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(22,163,74,0.1));
+    animation: pulse 0.5s ease;
+  }
+  .quiz-opt.wrong { 
+    border-color: var(--danger); 
+    background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(220,38,38,0.1));
+    animation: shake 0.5s ease;
+  }
+  
+  .chat-log { 
+    height: 350px; 
+    overflow-y: auto; 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; 
+    padding: 16px; 
+    margin-bottom: 14px; 
+  }
+  .msg { 
+    padding: 12px 18px; 
+    border-radius: 18px; 
+    margin: 10px 0; 
+    max-width: 85%; 
+    font-size: 14px; 
+    line-height: 1.7;
+    animation: slideUp 0.3s ease;
+  }
+  .msg.user { 
+    background: linear-gradient(135deg, var(--primary), var(--primary-light)); 
+    color: #fff; 
+    margin-left: auto; 
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 16px rgba(26,92,61,0.3);
+  }
+  .msg.bot { 
+    background: rgba(255,255,255,0.06); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-bottom-left-radius: 4px;
+    color: var(--text-secondary);
+  }
+  .chat-input { display: flex; gap: 10px; }
+  .chat-input input { 
+    flex: 1; 
+    padding: 14px 20px; 
+    border-radius: 50px; 
+    border: 2px solid rgba(30,92,61,0.5); 
+    font-size: 15px; 
+    font-family: inherit;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+  .chat-input input:focus { 
+    outline: none; 
+    border-color: var(--secondary); 
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.15);
+  }
+  .chat-input input::placeholder { color: var(--text-muted); }
+  
+  .video-list a { 
+    display: flex; 
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px; 
+    background: rgba(255,255,255,0.04); 
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; 
+    margin: 10px 0; 
+    color: var(--secondary); 
+    text-decoration: none; 
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .video-list a:hover { 
+    background: rgba(201,168,76,0.1); 
+    border-color: var(--secondary);
+    transform: translateX(4px);
+    color: #fff;
+  }
+  .video-list a span { font-weight: 400; color: var(--text-muted); font-size: 13px; }
+  
+  .stat { 
+    text-align: center; 
+    padding: 24px 16px; 
+    border-radius: 18px; 
+    color: #fff; 
+    background: linear-gradient(135deg, currentColor 0%, color-mix(in srgb, currentColor 70%, black) 100%);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+  .stat:hover { transform: translateY(-4px); }
+  
+  .home-hero { 
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #0d3d2e 100%);
+    color: #fff; 
+    border-radius: 24px; 
+    padding: 60px 24px; 
+    text-align: center; 
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(26,92,61,0.4);
+  }
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(201,168,76,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(232,108,26,0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .home-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100px;
+    background: linear-gradient(to top, var(--primary), transparent);
+    pointer-events: none;
+  }
+  .home-hero > * { position: relative; z-index: 1; }
+  
+  .levels-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 16px; 
+  }
+  
+  .creator-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(232,108,26,0.1));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50px;
+    padding: 12px 24px;
+    margin: 20px auto;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 15px;
+    backdrop-filter: blur(10px);
+  }
+  .creator-badge::before { content: '✨'; }
+  .creator-badge::after { content: '✨'; }
+  
+  .profile-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary);
+    box-shadow: 
+      0 8px 32px rgba(201,168,76,0.4),
+      0 0 0 4px rgba(26,92,61,0.3),
+      inset 0 2px 4px rgba(255,255,255,0.1);
+    margin: 0 auto 20px;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 12px 40px rgba(201,168,76,0.5),
+      0 0 0 4px rgba(26,92,61,0.3),
+      inset 0 2px 4px rgba(255,255,255,0.1);
+  }
+  .profile-image-small {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    flex-shrink: 0;
+  }
+  
+  .prayer-section {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .prayer-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .prayer-title::before,
+  .prayer-title::after {
+    content: '۞';
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+  .prayer-text-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    direction: rtl;
+    color: var(--text-primary);
+    line-height: 2.5;
+    margin: 16px 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .prayer-text-translation {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 16px;
+    font-style: italic;
+  }
+  .prayer-reference {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  
+  .floating-elements {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .floating-element {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.05;
+    animation: float 20s infinite ease-in-out;
+  }
+  
+  .section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+    margin: 30px 0;
+    border-radius: 2px;
+  }
+  
+  .founder-section {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .founder-card {
+    background: linear-gradient(135deg, rgba(26,92,61,0.3), rgba(201,168,76,0.1));
+    border: 2px solid var(--secondary);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .founder-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite.
+  }
+  .founder-card > * { position: relative; z-index: 1; }
+  .founder-name {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--secondary);
+    margin: 16px 0 8px;
+  }
+  .founder-title {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .founder-bio {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 640px) {
+    .card { padding: 20px; }
+    .nav { padding: 8px 12px; margin: -20px -20px 16px -20px; }
+    .nav button { padding: 8px 14px; font-size: 12px; }
+    .home-hero { padding: 40px 16px; border-radius: 16px; }
+    .arabic { font-size: 1.6em; }
+    .arabic-sm { font-size: 1.3em; }
+    .urdu { font-size: 1.1em; }
+    .prayer-text-arabic { font-size: 1.3rem; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .profile-image { width: 110px; height: 110px; }
+    .profile-image-small { width: 50px; height: 50px; }
+    .founder-name { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="floating-elements" id="floating-elements"></div>
+
+  <div class="nav" id="nav"></div>
+
+  <!-- ================= HOME ================= -->
+  <div class="page active" id="page-home" style="--c:#4caf50">
+    <div class="home-hero">
+      <img src="profile-photo.jpg" alt="Naseer Ahmad Lone - Founder" class="profile-image" onerror="this.style.display='none'">
+      <h1>🌙 Arabic Mastery Academy</h1>
+      <h2 class="urdu">عربی سیکھیں — آسان طریقے سے، ابتدا سے ماسٹر تک</h2>
+      <p style="margin:20px 0;font-size:18px;max-width:800px;margin-left:auto;margin-right:auto;opacity:0.95">
+        Learn Arabic from Zero to Master — English + اردو explanations, Quranic examples, homework, quizzes & AI tutor.
+      </p>
+      
+      <div class="creator-badge">
+        Created with ♡ by <strong>Naseer Ahmad Lone</strong>
+      </div>
+      
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" style="--c:#fff;background:#fff;color:#1a2980" onclick="go('levels')">🚀 Start Learning</button>
+        <button class="btn ghost" onclick="go('progress')">📊 My Progress</button>
+        <button class="btn accent" onclick="go('tutor')">🤖 AI Tutor</button>
+      </div>
+    </div>
+
+    <!-- Founder Section -->
+    <div class="founder-section">
+      <div class="founder-card">
+        <h3 style="color:var(--secondary);font-size:1.3rem;margin-bottom:8px">🌟 Meet the Founder</h3>
+        <div class="founder-name">Naseer Ahmad Lone</div>
+        <div class="founder-title">Founder & Arabic Language Educator</div>
+        <p class="founder-bio">
+          Passionate about making Quranic Arabic accessible to everyone. I created this academy to help students master Arabic through structured lessons, Quranic examples, and modern technology.
+        </p>
+      </div>
+    </div>
+
+    <!-- Islamic Prayers Section -->
+    <div class="prayer-section">
+      <h3 class="prayer-title">🤲 Dua for Seeking Knowledge</h3>
+      <div class="prayer-box">
+        <p class="prayer-text-arabic">رَبِّ زِدْنِي عِلْمًا</p>
+        <p class="prayer-text-translation">"My Lord, increase me in knowledge."</p>
+        <p class="prayer-reference">— Surah Taha (20:114) | سورة طہ</p>
+      </div>
+      
+      <p class="urdu" style="max-width:700px;margin:16px auto;color:#cbd5e1;font-size:1.1em">
+        اللہ میری علم میں اضافہ فرما | الم ۔
+      </p>
+    </div>
+
+    <div class="prayer-section">
+      <h3 class="prayer-title">📖 Quranic Prayer for Easy Learning</h3>
+      <div class="prayer-box">
+        <p class="prayer-text-arabic">وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ</p>
+        <p class="prayer-text-translation">"And We have certainly made the Quran easy for remembrance, so is there any who will remember?"</p>
+        <p class="prayer-reference">— Surah Al-Qamar (54:17, 22, 32, 40) | سورة القمر</p>
+      </div>
+      <p class="urdu" style="max-width:700px;margin:16px auto;color:#cbd5e1;font-size:1.1em">
+        اور ہم نے قرآن کو یاد رکھنے کے لیے بالکل آسان بنا دیا، تو کیا کوئی نصیحت حاصل کرنے والا ہے؟
+      </p>
+    </div>
+
+    <div class="prayer-section">
+      <h3 class="prayer-title">📜 Sahih Hadith - Prayer for Beneficial Knowledge</h3>
+      <div class="prayer-box">
+        <p class="prayer-text-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا</p>
+        <p class="prayer-text-translation">"O Allah, I ask You for beneficial knowledge, good provision, and accepted deeds."</p>
+        <p class="prayer-reference">— Sunan Ibn Majah 3843, Sahih | سنن ابن ماجہ</p>
+      </div>
+      <p class="urdu" style="max-width:700px;margin:16px auto;color:#cbd5e1;font-size:1.1em">
+        اے اللہ! میں تجھ سے نفع بخش علم، حلال رزق، اور مقبول کام مانگتا ہوں۔
+      </p>
+    </div>
+
+    <div class="prayer-section">
+      <h3 class="prayer-title">🤲 Personal Dua for Arabic Mastery</h3>
+      <div class="prayer-box">
+        <p class="prayer-text-arabic">رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ</p>
+        <p class="prayer-text-translation">"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents, and to do righteousness of which You approve."</p>
+        <p class="prayer-reference">— Surah An-Naml (27:19) | سورة النمل</p>
+      </div>
+      <div class="quran-box" style="margin-top:16px;text-align:left">
+        <h4 style="color:var(--secondary);margin-bottom:10px">🌟 Special Dua for Students of Arabic:</h4>
+        <p class="arabic-sm" style="font-size:1.4em">اللَّهُمَّ سَهِّلْ لَنَا تَعَلُّمَ الْعَرَبِيَّةِ وَاجْعَلْنَا مِنْ أَهْلِ الْقُرْآنِ</p>
+        <p style="margin-top:8px;color:var(--text-secondary)">
+          "O Allah, make learning Arabic easy for us and make us among the people of the Quran."
+        </p>
+        <p class="urdu-sm" style="margin-top:8px;color:#94a3b8">
+          اے اللہ! ہمارے لیے عربی سیکھنا آسان فرما اور ہمیں قرآن کے لوگوں میں شامل فرما۔
+        </p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="card" style="--c:#c9a84c">
+      <h3>📖 What You Get / آپ کیا سیکھیں گے</h3>
+      <div class="levels-grid" style="margin-top:16px">
+        <div class="stat" style="background:#e91e63">🏁 Beginner<br><small>Alphabet & Sounds</small><br><small class="urdu">حروف تہجی</small></div>
+        <div class="stat" style="background:#3f51b5">📗 Elementary<br><small>Words & Sentences</small><br><small class="urdu">الفاظ اور جملے</small></div>
+        <div class="stat" style="background:#009688">📘 Intermediate<br><small>Grammar / قواعد</small><br><small class="urdu">گرامر</small></div>
+        <div class="stat" style="background:#ff5722">📙 Advanced<br><small>Quran & Mastery</small><br><small class="urdu">قرآنی عربی</small></div>
+      </div>
+    </div>
+
+    <div class="card" style="--c:#c9a84c">
+      <h3>🎯 How It Works / طریقہ کار</h3>
+      <p>1️⃣ Complete each lesson & watch its videos &nbsp;•&nbsp; <span class="urdu">ہر سبق مکمل کریں اور ویڈیوز دیکھیں</span></p>
+      <p>2️⃣ Do the homework & pass the quiz &nbsp;•&nbsp; <span class="urdu">ہوم ورک کریں اور کوئز پاس کریں</span></p>
+      <p>3️⃣ Ask the AI Tutor anything &nbsp;•&nbsp; <span class="urdu">اے آئی ٹیوٹر سے سوال پوچھیں</span></p>
+      <p>4️⃣ Track your progress on the Dashboard &nbsp;•&nbsp; <span class="urdu">پیش رفت دیکھیں</span></p>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,rgba(26,92,61,0.3),rgba(201,168,76,0.15));border-color:rgba(201,168,76,0.4)">
+      <h3 style="color:var(--secondary);margin-bottom:12px">🌟 Barakah in Your Learning Journey</h3>
+      <p class="urdu" style="font-size:1.2em;margin-bottom:12px">اللہ آپ کی کوشش کو مقبول فرما اور آپ کو قرآن کی سمجھ نصیب کرے۔ آمین</p>
+      <p style="color:var(--text-secondary);font-style:italic">"Seek knowledge from the cradle to the grave." — Prophet Muhammad ﷺ</p>
+      <p class="urdu-sm" style="margin-top:8px">"علم حاصل کرو جھولے سے قبر تک" — حضور اکرم ﷺ</p>
+    </div>
+  </div>
+
+  <!-- ================= LEVELS ================= -->
+  <div class="page" id="page-levels" style="--c:#3f51b5">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>🗺️ Course Levels <span class="urdu">— کورس کی سطحیں</span></h2>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="profile-photo.jpg" alt="Naseer Ahmad Lone" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">
+          Naseer Ahmad Lone
+        </div>
+      </div>
+    </div>
+    <p style="margin:8px 0;color:var(--text-secondary)">Finish each level's lessons & quizzes to unlock the next. <span class="urdu">ہر لیول مکمل کریں تاکہ اگلا کھلے۔</span></p>
+    <div id="levels-list"></div>
+  </div>
+
+  <!-- ================= LESSON ================= -->
+  <div class="page" id="page-lesson" style="--c:#009688">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <button class="btn ghost small" style="--c:#009688" onclick="go('levels')">⬅ Back to Levels</button>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Naseer Ahmad Lone" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:12px;padding:6px 12px">Naseer Ahmad Lone</div>
+      </div>
+    </div>
+    <div id="lesson-content"></div>
+  </div>
+
+  <!-- ================= QUIZ ================= -->
+  <div class="page" id="page-quiz" style="--c:#ff5722">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>📝 Quiz <span class="urdu">— آزمائش</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Naseer Ahmad Lone" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Naseer Ahmad Lone</div>
+      </div>
+    </div>
+    <div id="quiz-content"></div>
+  </div>
+
+  <!-- ================= PROGRESS ================= -->
+  <div class="page" id="page-progress" style="--c:#e91e63">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>📊 My Progress <span class="urdu">— میری پیش رفت</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Naseer Ahmad Lone" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Naseer Ahmad Lone</div>
+      </div>
+    </div>
+    <div class="card" style="--c:#e91e63">
+      <h3 id="overall-label">Overall Completion</h3>
+      <div class="progress-wrap"><div class="progress-bar" id="overall-bar">0%</div></div>
+      <div class="levels-grid" style="margin-top:20px" id="progress-stats"></div>
+    </div>
+    <div class="card" style="--c:#c9a84c">
+      <h3>🏅 Achievements <span class="urdu">— اعزازات</span></h3>
+      <div id="achievements"></div>
+    </div>
+    <button class="btn" style="--c:#c62828" onclick="resetProgress()">🗑️ Reset Progress</button>
+  </div>
+
+  <!-- ================= AI TUTOR ================= -->
+  <div class="page" id="page-tutor" style="--c:#7b1fa2">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <h2>🤖 AI Tutor <span class="urdu">— اے آئی استاد</span></h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="profile-photo.jpg" alt="Naseer Ahmad Lone" class="profile-image-small" onerror="this.style.display='none'">
+        <div class="creator-badge" style="margin:0;font-size:13px;padding:8px 16px">Naseer Ahmad Lone</div>
+      </div>
+    </div>
+    <p style="margin:6px 0;color:var(--text-secondary)">Ask anything about Arabic — grammar, meaning, Quranic verses. <span class="urdu">عربی کے بارے میں کچھ بھی پوچھیں۔</span></p>
+    <div class="card" style="--c:#7b1fa2">
+      <div class="chat-log" id="chat-log">
+        <div class="msg bot">Assalam-o-Alaikum! 👋 I'm your Arabic tutor. <span class="urdu">میں آپ کا عربی استاد ہوں۔</span> Ask me anything — e.g. "What does <b>الحمدللہ</b> mean?" or "Explain إنَّ (Inna) with a Quranic example."</div>
+      </div>
+      <div class="chat-input">
+        <input id="chat-in" placeholder="Type your question… / سوال لکھیں…" onkeydown="if(event.key==='Enter')sendMsg()">
+        <button class="btn" style="--c:#7b1fa2" onclick="sendMsg()">Send ➤</button>
+      </div>
+      <div style="margin-top:14px">
+        <span style="font-size:13px;color:var(--text-muted)">Quick Questions:</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn ghost small" style="--c:#7b1fa2" onclick="quickAsk('What is إنَّ and its Quranic example?')">إنَّ؟</button>
+          <button class="btn ghost small" style="--c:#7b1fa2" onclick="quickAsk('Meaning of بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')">بسم اللہ؟</button>
+          <button class="btn ghost small" style="--c:#7b1fa2" onclick="quickAsk('Explain Harf-e-Jarr with Quran example')">Harf-e-Jarr؟</button>
+          <button class="btn ghost small" style="--c:#7b1fa2" onclick="quickAsk('What are the Sun and Moon letters?')">Sun/Moon Letters؟</button>
+          <button class="btn ghost small accent" style="--c:#c9a84c" onclick="quickAsk('Dua for seeking knowledge from Quran')">🤲 Dua?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============ FLOATING ELEMENTS ============ */
+    const floatingContainer = document.getElementById('floating-elements');
+    const floatingSymbols = ['☪', '۞', '🌙', '✨', '📖', '🕌', '🤲', '📿', '☪️', '🌟'];
+    for(let i=0; i<15; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-element';
+      el.textContent = floatingSymbols[Math.floor(Math.random() * floatingSymbols.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.top = Math.random() * 100 + '%';
+      el.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+      el.style.animationDelay = Math.random() * 20 + 's';
+      el.style.animationDuration = (15 + Math.random() * 15) + 's';
+      floatingContainer.appendChild(el);
+    }
+
+    /* ============ DATA ============ */
+    const LEVELS = [
+      { id:'beginner', name:'Beginner', urdu:'مبتدی', color:'#e91e63', grad:['#e91e63','#ad1457'],
+        desc:'Arabic Alphabet, Sounds & Joining Letters', udesc:'حروف تہجی، آوازیں اور حروف کو ملانا',
+        lessons:[
+         { id:'b1', title:'The Alphabet — حروف تہجی', points:[
+           {en:'Arabic has 28 letters. Learning them with their sounds is step one.', ur:'عربی زبان میں 28 حروف ہیں۔ پہلا قدم ان کے تلفظ کے ساتھ یاد کرنا ہے۔'},
+           {en:'Letters change shape depending on position: initial, medial, final, or isolated.', ur:'حروف اپنی شکل بدلتے ہیں — شروع، درمیان یا آخر میں الگ شکل ہوتی ہے۔'},
+           {en:'Practice writing each letter 10 times. / ہر حرف دس بار لکھ کر مشق کریں۔'}],
+           examples:[{ar:'ب', en:'Baa — like "b" in "book"', ur:'ب جیسے انگریزی b'},
+                     {ar:'م ـمـ', en:'Meem — isolated & joined forms', ur:'میرا آخری اور جڑا ہوا روپ'}],
+           quran:{ar:'اقْرَأْ بِاسْمِ رَبِّكَ', ref:'Surah Al-Alaq 96:1', en:'Iqra — Read! The very first revealed word starts with ا ق ر أ.', ur:'سب سے پہلا نازل شدہ لفظ "اقرأ" (پڑھو) — حروف ق، ر، أ سیکھیں۔'},
+           video:[{ch:'Arabic Alphabet Songs — Kids', url:'https://www.youtube.com/results?search_query=arabic+alphabet+song+for+kids', note:'Fun memorization'},
+                  {ch:'Learn With Zakaria', url:'https://www.youtube.com/results?search_query=learn+with+zakaria+arabic+alphabet', note:'Letter sounds with actions'},
+                  {ch:'Madinah Arabic Course', url:'https://www.youtube.com/results?search_query=madinah+arabic+book+1+lesson+1+alphabet', note:'Academic start'}],
+           hw:'Write all 28 letters in isolated, initial, medial and final forms — 3 times each. Then recite them aloud. (سب حروف چاروں شکلوں میں لکھیں اور بلند آواز سے پڑھیں۔)'},
+         { id:'b2', title:'Vowels — Harakaat (حرکات)', points:[
+           {en:'Fatha ( ـَ ) gives an "a" sound: بَ = ba.', ur:'زبر (فتحہ) a کی آواز دیتی ہے: بَ = با'},
+           {en:'Kasra ( ـِ ) gives an "i" sound: بِ = bi.', ur:'زیر (کسرہ) i کی آواز دیتی ہے: بِ = بی'},
+           {en:'Damma ( ـُ ) gives a "u" sound: بُ = bu.', ur:'پیش (ضمہ) u کی آواز دیتی ہے: بُ = بُو'},
+           {en:'Sukoon ( ـْ ) means no vowel: بْ = b.', ur:'جزم (سکون) — آواز روک دیتا ہے: بْ = ب'}],
+           examples:[{ar:'بَبِبُبْ', en:'Practice the 4 vowels on one letter', ur:'ایک حرف پر چاروں حرکات کی مشق'}],
+           quran:{ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', ref:'Opening of every Surah', en:'Count the harakaat! Bi-smil-laa-hir-raḥ-maa-nir-ra-ḥeem — a perfect Fatha/Kasra practice verse.', ur:'اس آیت میں فتحہ اور کسرہ کا بہترین مشق ہے۔'},
+           video:[{ch:'Arabic with Maha', url:'https://www.youtube.com/results?search_query=arabic+vowels+harakat+lesson', note:'Pronunciation drills'},
+                  {ch:'Studio Arabiya', url:'https://www.youtube.com/results?search_query=noorani+qaedah+harakat+lesson', note:'Noorani Qaedah method'},
+                  {ch:'Imam Qasim', url:'https://www.youtube.com/results?search_query=learn+harakat+fatha+kasra+damma+urdu', note:'اردو میں سمجھائی گئی حرکات'}],
+           hw:'Take 10 letters and write each with Fatha, Kasra, Damma and Sukoon. Read them aloud 5 times. (دس حروف پر چاروں حرکات لگائیں۔)'},
+         { id:'b3', title:'Long Vowels — Madd (مد)', points:[
+           {en:'Alif after Fatha stretches "a": بَا = baa.', ur:'الف کے بعد زبر آواز کھینچتی ہے: بَا = باآ'},
+           {en:'Yaa after Kasra stretches "i": بِي = bee.', ur:'ی کے بعد زیر i کو کھینچتی ہے: بِي = بِی'},
+           {en:'Waw after Damma stretches "u": بُو = boo.', ur:'و کے بعد پیش u کو کھینچتی ہے: بُو = بُو'}],
+           examples:[{ar:'قَالَ، قِيلَ، قُولُوا', en:'Qaala / Qiila / Qooluu — all three madd types', ur:'تینوں مد کی مثالیں'}],
+           quran:{ar:'قُلْ هُوَ اللَّهُ أَحَدٌ', ref:'Surah Al-Ikhlas 112:1', en:'"Qul huwallaahu Ahad" — Qul (قُلْ) has Damma, huwa stretches with waw. Perfect madd practice.', ur:'"قُلْ" میں ضمہ اور "هُوَ" میں مد واضح ہے۔'},
+           video:[{ch:'Tajweed Made Easy', url:'https://www.youtube.com/results?search_query=madd+long+vowels+arabic+tajweed', note:'Stretching rules'},
+                  {ch:'Quran Academy', url:'https://www.youtube.com/results?search_query=noorani+qaedah+madd+letters+lesson', note:'Step-by-step reading'}],
+           hw:'Write 6 words using each long vowel (Alif, Yaa, Waw) twice and read them. (ہر مد کی مثالیں لکھیں۔)'}
+        ]},
+      { id:'elementary', name:'Elementary', urdu:'ابتدائی', color:'#3f51b5', grad:['#3f51b5','#283593'],
+        desc:'Essential Words, Greetings & Simple Sentences', udesc:'ضروری الفاظ، سلام دعا اور سادہ جملے',
+        lessons:[
+         { id:'e1', title:'Greetings & Daily Words — سلام اور روزمرہ کے الفاظ', points:[
+           {en:'Islamic greetings carry beautiful meanings — learn them with feeling.', ur:'اسلامی سلام میں خوبصورت معنی ہیں — محسوس کر کے سیکھیں۔'},
+           {en:'Build a habit: use 3 Arabic words daily.', ur:'عادت بنائیں: روزانہ تین عربی الفاظ بولیں۔'}],
+           examples:[{ar:'السَّلَامُ عَلَيْكُمْ', en:'Peace be upon you', ur:'آپ پر سلامتی ہو'},
+                     {ar:'صَبَاحُ الْخَيْرِ', en:'Good morning', ur:'صبح بخیر'},
+                     {ar:'كَيْفَ حَالُكَ؟', en:'How are you?', ur:'آپ کیسے ہیں؟'}],
+           quran:{ar:'وَعَلَيْكُمُ السَّلَامُ', ref:'The reply — Quranic style greeting', en:'The reply "Wa alaykumus-salaam" appears in the Quran itself, in the story of Ibrahim (ع).', ur:'جواب "وعليکم السلام" خود قرآن میں ابراہیم (ع) کے قصے میں آیا ہے۔'},
+           video:[{ch:'Arabic Pod 101', url:'https://www.youtube.com/results?search_query=arabic+greetings+for+beginners', note:'Daily phrases'},
+                  {ch:'Madina Arabic', url:'https://www.youtube.com/results?search_query=madinah+arabic+book+1+greetings+dialogue', note:'Full conversations'}],
+           hw:'Memorize 10 greetings. Write each with its Urdu meaning and use 3 today! (دس سلام یاد کریں اور تین آج بولیں۔)'},
+         { id:'e2', title:'Pronouns — ضمائر (Damaa\'ir)', points:[
+           {en:' singular: أنا (I), أنتَ/أنتِ (you M/F), هُوَ (he), هِيَ (she).', ur:'واحد: أنا (میں)، أنتَ/أنتِ (آپ)، ہُوَ (وہ مذکر)، ہِیَ (وہ مؤنث)۔'},
+           {en:'Plural: نحنُ (we), أنتُم (you all), هُم (they).', ur:'جمع: نحنُ (ہم)، أنتُم (آپ سب)، ہُم (وہ سب)۔'},
+           {en:'Pronouns are attached to verbs in Arabic — "qultu" = قلتُ (I said).', ur:'عربی میں ضمائر فعل کے ساتھ جڑی ہوتی ہیں — قلتُ = میں نے کہا۔'}],
+           examples:[{ar:'أنا أَتَعَلَّمُ الْعَرَبِيَّةَ', en:'I am learning Arabic.', ur:'میں عربی سیکھ رہا ہوں۔'}],
+           quran:{ar:'قَالَ رَبُّكُمُ اللَّهُ', ref:'Surah Yunus 10:3', en:'رَبُّكُمْ = "YOUR Lord" — كُمْ (you all) attached to رب. See how pronouns glue onto words.', ur:'رَبُّكُمْ میں كُمْ (تم سب) لفظ رب سے جڑا ہے — یہی عربی کا نظام ہے۔'},
+           video:[{ch:'Learn Arabic with Maha', url:'https://www.youtube.com/results?search_query=arabic+pronouns+lesson+beginners', note:'Personal pronouns'},
+                  {ch:'Madinah Arabic Series', url:'https://www.youtube.com/results?search_query=madinah+arabic+pronouns+damaair', note:'Attached pronouns intro'}],
+           hw:'Make 8 sentences: "أنا + a verb/word" for each pronoun, then translate to Urdu. (ہر ضمیر کے ساتھ ایک جملہ بنائیں۔)'},
+         { id:'e3', title:'Simple Sentences — سادہ جملے', points:[
+           {en:'Arabic sentence = Subject + Verb or Subject + Predicate.', ur:'عربی جملہ = فاعل + فعل یا مبتدا + خبر۔'},
+           {en:'The verb usually comes FIRST in Arabic.', ur:'عربی میں فعل عموماً پہلے آتا ہے۔'},
+           {en:'No word for "is/am/are" in the present — just say the two words!', ur:'حال کے جملے میں "ہے/ہیں" نہیں ہوتا — دو الفاظ کافی ہیں!'}],
+           examples:[{ar:'هَذَا كِتَابٌ', en:'This is a book.', ur:'یہ کتاب ہے۔'},
+                     {ar:'الْبَيْتُ كَبِيرٌ', en:'The house is big.', ur:'گھر بڑا ہے۔'}],
+           quran:{ar:'هَٰذَا بَيَانٌ لِّلنَّاسِ', ref:'Surah Aal-e-Imran 3:138', en:'"Haadhaa bayaanun lin-naas" — THIS is a clear explanation. Same pattern: This is X!', ur:'قرآن کا جملہ "یہ لوگوں کے لیے واضح بیان ہے" — وہی سادہ ڈھانچہ!'},
+           video:[{ch:'Arabic with Sam', url:'https://www.youtube.com/results?search_query=arabic+sentence+structure+beginners', note:'Word order'},
+                  {ch:'Quran Arabic Corpus', url:'https://www.youtube.com/results?search_queue=arabic+nominal+sentence+mubtada+khabar', note:'Mubtada & Khabar'}],
+           hw:'Write 5 "This is…" sentences about objects in your room, in Arabic with Urdu meaning. (اپنے کمرے کی چیزوں کے بارے میں 5 جملے لکھیں۔)'}
+        ]},
+      { id:'intermediate', name:'Intermediate', urdu:'درمیانی', color:'#009688', grad:['#009688','#00695c'],
+        desc:'Grammar (Nahw): Nouns, Verbs & Particles', udesc:'نحو: اسم، فعل اور حرف',
+        lessons:[
+         { id:'i1', title:'The 3 Word Types — اسم، فعل، حرف', points:[
+           {en:'Every Arabic word is: Ism (noun), Fi\'l (verb), or Harf (particle).', ur:'ہر عربی لفظ یا تو اسم ہے، فعل ہے، یا حرف۔'},
+           {en:'Ism: person/place/thing — كتاب (book), بيت (house).', ur:'اسم: شخص، جگہ، چیز — كتاب، بيت۔'},
+           {en:'Fi\'l: action — كَتَبَ (wrote), يَكْتُبُ (writes).', ur:'فعل: کوئی کام — كَتَبَ (لکھا)، يَكْتُبُ (لکھتا ہے)۔'},
+           {en:'Harf: connector with no complete meaning — في (in), على (on).', ur:'حرف: جوڑنے والا لفظ — في، على۔'}],
+           examples:[{ar:'ذَهَبَ مُحَمَّدٌ إِلَى الْمَسْجِدِ', en:'Went Muhammad to the mosque — Fi\'l, Ism, Harf, Ism', ur:'فعل + اسم + حرف + اسم کی مثال'}],
+           quran:{ar:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', ref:'Surah Al-Baqarah 2:153', en:'Innal-laaha ma\'as-saabireen — إنَّ (particle) + الله (noun) + مع (particle) + الصابرين (noun). The whole Quran is just these 3 types!', ur:'یہ آیت خود حرف، اسم، حرف، اسم کا نمونہ ہے!'},
+           video:[{ch:'Bayyinah TV', url:'https://www.youtube.com/results?search_query=bayyinah+arabic+ism+fail+harf', note:'Nouman Ali Khan style'},
+                  {ch:'Arabic Between Your Hands', url:'https://www.youtube.com/results?search_query=arabic+between+your+hands+lesson+1', note:'University method'}],
+           hw:'Pick any 5 verses of a short Surah (e.g. Al-Ikhlas) and label every word as Ism / Fi\'l / Harf. (کسی سورۃ کے 5 الفاظ کی اقسام لکھیں۔)'},
+         { id:'i2', title:'Noun Cases — إعراب (I\'raab)', points:[
+           {en:'Marfu ( ـُ ): subject of sentence — الولدُ ضربَ (the boy hit).', ur:'مرفوع ( ـُ ): فاعل کے ساتھ — الولدُ۔'},
+           {en:'Mansub ( ـَ ): object — ضربَ الولدَ (hit the boy).', ur:'منصوب ( ـَ ): مفعول کے ساتھ۔'},
+           {en:'Majrur ( ـِ ): after Harf-e-Jarr — في البيتِ (in the house).', ur:'مجرور ( ـِ ): حرفِ جار کے بعد۔'}],
+           examples:[{ar:'جَاءَ الْوَلَدُ الْمُدَرِّسَ فِي الْبَيْتِ', en:'The boy came TO the teacher IN the house — watch the endings change!', ur:'آخری حروف کی تبدیلی غور سے دیکھیں!'}],
+           quran:{ar:'فَذَكِّرْ إِنَّمَا أَنتَ مُذَكِّرٌ', ref:'Surah Al-Ghashiyah 88:21', en:'"You are ONLY a reminder" — إنما + mansub shows restriction. Quranic grammar in one line.', ur:'إنَّما کے بعد منصوب آتا ہے — یہی اعراب کا استعمال قرآن میں ہے۔'},
+           video:[{ch:'Arabic Grammar Gems', url:'https://www.youtube.com/results?search_query=arabic+irab+noun+cases+lesson', note:'Case endings'},
+                  {ch:'Madinah Arabic Book 2', url:'https://www.youtube.com/results?search_query=madinah+arabic+book+2+irab', note:'Deep i\'raab'}],
+           hw:'Take 5 simple sentences and mark marfu/mansub/majrur on each word. (پانچ جملوں پر اعراب لگائیں۔)'},
+         { id:'i3', title:'Verbs: Past, Present, Command — فعل ماضي، مضارع، أمر', points:[
+           {en:'Madi (past): كَتَبَ — he wrote. Fixed, completed action.', ur:'ماضی: مکمل ہوا کام — كَتَبَ (اس نے لکھا)۔'},
+           {en:'Mudari (present): يَكْتُبُ — he writes/is writing. Starts with ي or ت or ن or أ.', ur:'مضارع: جاری کام — يَكْتُبُ (لکھتا ہے)۔'},
+           {en:'Amr (command): اُكْتُبْ — Write! Drop the ن of present and add sukoon.', ur:'أمر: حکم — اُكْتُبْ (لکھو!)۔'}],
+           examples:[{ar:'كَتَبَ / يَكْتُبُ / اُكْتُبْ', en:'Wrote / Writes / Write!', ur:'لکھا / لکھتا ہے / لکھو!'}],
+           quran:{ar:'اقْرَأْ', ref:'Surah Al-Alaq 96:1', en:'The very first word of revelation is a COMMAND verb — Iqra! Read! One word shows you amr.', ur:'سب سے پہلا نازل لفظ خود "أمر" ہے — اقرأ! پڑھو!'},
+           video:[{ch:'Arabic Verb Conjugation', url:'https://www.youtube.com/results?search_query=arabic+verb+conjugation+past+present+imperative', note:'All 3 forms'},
+                  {ch:'Studio Arabiya', url:'https://www.youtube.com/results?search_query=sarf+verb+forms+arabic+urdu', note:'اردو میں صرف'}],
+           hw:'Conjugate one verb in all 3 forms, then write a command to yourself in Arabic. (ایک فعل تینوں صورتوں میں اور ایک حکم لکھیں۔)'}
+        ]},
+      { id:'advanced', name:'Advanced', urdu:'اعلیٰ', color:'#ff5722', grad:['#ff5722','#e64a19'],
+        desc:'Quranic Arabic & Master Level', udesc:'قرآنی عربی اور ماسٹر لیول',
+        lessons:[
+         { id:'a1', title:'Harf-e-Jarr & Quranic Phrases — حروف جار', points:[
+           {en:'Harf-e-Jarr always makes the next word majrur (ـِ).', ur:'حرفِ جار کے بعد والا لفظ ہمیشہ مجرور (ـِ) ہوتا ہے۔'},
+           {en:'Common ones: بِ (with/by), لِ (for), مِنْ (from), فِي (in), عَلَى (on), إِلَى (to), عَنْ (about).', ur:'مشہور حروف: بِ، لِ، مِنْ، فِي، عَلَى، إِلَى، عَنْ۔'},
+           {en:'Memorize whole Quranic phrases instead of single words.', ur:'اکیلے لفظوں کی بجائے مکمل قرآنی فقرے یاد کریں۔'}],
+           examples:[{ar:'بِاللهِ، لِلهِ، مِنَ النَّاسِ، فِي الْقُرْآنِ', en:'With Allah, for Allah, from the people, in the Quran', ur:'اللہ کے ساتھ، اللہ کے لیے، لوگوں میں سے، قرآن میں'}],
+           quran:{ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', ref:'Surah Al-Fatiha 1:1', en:'The most repeated phrase on Earth! بِ = Harf-e-Jarr → اسمِ majrur, اللهِ majrur. Grammatically perfect opening.', ur:'دنیا کا سب سے زیادہ دہرایا جانے والا جملہ — اور اس کا آغاز ہی حرفِ جار سے ہوتا ہے!'},
+           video:[{ch:'Understand Quran Academy', url:'https://www.youtube.com/results?search_query=harf+e+jarr+quran+phrases', note:'Phrase method'},
+                  {ch:'Bayyinah', url:'https://www.youtube.com/results?search_query=nouman+ali+khan+harf+jarr+lesson', note:'Deep analysis'}],
+           hw:'Memorize 5 Quranic phrases with harf-e-jarr and write each word\'s i\'raab. (پانچ قرآنی فقرے یاد کریں۔)'},
+         { id:'a2', title:'Emphatic Particles — إنَّ Family', points:[
+           {en:'إنَّ (Inna) = emphasis: "Indeed/verily". Ism after it becomes mansub.', ur:'إنَّ زور دینے کے لیے آتا ہے — "بے شک" — اور بعد کا اسم منصوب ہو جاتا ہے۔'},
+           {en:'آنَّ (Anna) = Inna in reported speech: قال إنَّ اللهَ...', ur:'آنَّ رپورٹ شدہ کلام میں إنَّ کی جگہ آتا ہے۔'},
+           {en:'لكنَّ (Lakinna) = "but" with emphasis.', ur:'لكنَّ = "لیکن" زور کے ساتھ۔'}],
+           examples:[{ar:'إِنَّ الصَّفَا وَالْمَرْوَةَ', en:'Indeed Safa and Marwa… (note: الصفا منصوب)', ur:'غور کریں — الصفا آخر میں ـَ ہے'}],
+           quran:{ar:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', ref:'Surah Al-Baqarah 2:153', en:'"Indeed, Allah is with the patient" — إنَّ اللهَ: Allah (a normally unchangeable name) takes the Fatha of mansub. That\'s the power of Inna!', ur:'اللہ جیسا غیر منصرف اسم بھی إنَّ کے سبب منصوب ہوا — یہی إنَّ کی طاقت ہے۔'},
+           video:[{ch:'Arabic Grammar', url:'https://www.youtube.com/results?search_query=inna+anna+lakinna+arabic+grammar+lesson', note:'The Inna family'},
+                  {ch:'Madinah Book 3', url:'https://www.youtube.com/results?search_query=madinah+arabic+book+3+inna', note:'Advanced usage'}],
+           hw:'Find 3 verses starting with إِنَّ and write the i\'raab of the word after it. (تین آیتیں تلاش کریں۔)'},
+         { id:'a3', title:'Master Tactics — ماسٹر حکمتِ عملی', points:[
+           {en:'Read 5 verses daily with a word-by-word translation.', ur:'روزانہ 5 آیات لفظ بہ لفظ ترجمے کے ساتھ پڑھیں۔'},
+           {en:'Keep a vocabulary journal — 5 new words daily.', ur:'لفظوں کا ڈائری بنائیں — روز 5 نئے الفاظ۔'},
+           {en:'Listen to recitation while reading the script (talaqqi method).', ur:'تلقی کا طریقہ: تلاوت سنیں اور متن دیکھیں۔'},
+           {en:'Teach what you learn — teaching locks knowledge in.', ur:'جو سیکھیں سکھائیں — سکھانا یادداشت مضبوط کرتا ہے۔'}],
+           examples:[{ar:'وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا', en:'And recite the Quran with measured rhythm', ur:'اور قرآن کو ٹھہر ٹھہر کر پڑھو'}],
+           quran:{ar:'وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ', ref:'Surah Al-Qamar 54:17', en:'"And We have certainly made the Quran EASY for remembrance" — Allah Himself promises ease. Keep going!', ur:'اللہ خود فرماتا ہے کہ ہم نے قرآن کو آسان کیا — ہمت رکھیں!'},
+           video:[{ch:'Word-by-Word Quran', url:'https://www.youtube.com/results?search_query=word+by+word+quran+translation+urdu', note:'Daily habit'},
+                  {ch:'Bayyinah TV', url:'https://www.youtube.com/results?search_query=bayyinah+tv+quranic+arabic+course', note:'Full course'}],
+           hw:'Create your 30-day master plan: 5 verses/day + 5 words/day + 1 grammar point/day. (30 دن کا منصوبہ بنائیں۔)'}
+        ]}
+    ];
+
+    const QUIZ_BANK = {
+      b1:{q:'How many letters are in the Arabic alphabet?', opts:['26','28','30','32'], a:1, uq:'عربی حروف تہجی میں کتنے حروف ہیں؟'},
+      b2:{q:'What sound does Damma ( ـُ ) give?', opts:['a','i','u','no sound'], a:2, uq:'ضمہ ( ـُ ) کونسی آواز دیتی ہے؟'},
+      b3:{q:'Which letter stretches the "a" sound (Fatha) into "aa"?', opts:['Yaa ي','Waw و','Alif ا','Sukoon'], a:2, uq:'فتحہ کو کھینچ کر "اآ" کون کرتا ہے؟'},
+      e1:{q:'السَّلَامُ عَلَيْكُمْ means:', opts:['Good morning','Peace be upon you','Thank you','Goodbye'], a:1, uq:'السلام عليکم کا مطلب؟'},
+      e2:{q:'هُوَ means:', opts:['I','You','She','He'], a:3, uq:'ہُوَ کا مطلب؟'},
+      e3:{q:'In Arabic, the verb usually comes…', opts:['Last','First','Middle','Anywhere'], a:1, uq:'عربی جملے میں فعل عموماً کہاں آتا ہے؟'},
+      i1:{q:'كَتَبَ (wrote) is which word type?', opts:['Ism (noun)','Fi\'l (verb)','Harf (particle)','Adjective'], a:1, uq:'كَتَبَ کس قسم کا لفظ ہے؟'},
+      i2:{q:'A word after Harf-e-Jarr becomes:', opts:['Marfu (ـُ)','Mansub (ـَ)','Majrur (ـِ)','Jazm (ـْ)'], a:2, uq:'حرفِ جار کے بعد والا لفظ کیا کہلاتا ہے؟'},
+      i3:{q:'اقْرَأْ (Read!) is which verb form?', opts:['Madi (past)','Mudari (present)','Amr (command)','None'], a:2, uq:'اقْرَأْ کونسا فعل ہے؟'},
+      a1:{q:'In بِسْمِ اللهِ, the word اللهِ ends with Kasra because:', opts:['It looks nice','Harf-e-Jarr بِ makes it Majrur','It is plural','No reason'], a:1, uq:'بِسْمِ اللهِ میں اللهِ پر زیر کیوں ہے؟'},
+      a2:{q:'إِنَّ makes the noun after it:', opts:['Marfu','Mansub','Majrur','Nothing changes'], a:1, uq:'إِنَّ کے بعد کا اسم کیا ہوتا ہے؟'},
+      a3:{q:'The best daily habit for mastering Quranic Arabic is:', opts:['Reading once a week','5 verses word-by-word daily','Only listening','Only grammar books'], a:1, uq:'قرآنی عربی میں مہارت کا بہترین روزانہ طریقہ؟'}
+    };
+
+    /* ============ STATE ============ */
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem('arabic_progress') || '{}'); } catch(e) { progress = {}; }
+    function saveProg(){ try { localStorage.setItem('arabic_progress', JSON.stringify(progress)); } catch(e){} }
+
+    let currentLesson = null;
+
+    /* ============ NAV ============ */
+    const TABS = [['home','🏠 Home'],['levels','🗺️ Levels'],['progress','📊 Progress'],['tutor','🤖 AI Tutor']];
+    const NAV = document.getElementById('nav');
+    TABS.forEach(([id,label],i)=>{
+      const b=document.createElement('button'); b.textContent=label; b.id='tab-'+id;
+      b.onclick=()=>go(id); NAV.appendChild(b);
+    });
+    function go(page){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.getElementById('page-'+page).classList.add('active');
+      document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+      const t=document.getElementById('tab-'+page); if(t) t.classList.add('active');
+      if(page==='levels') renderLevels();
+      if(page==='progress') renderProgress();
+      window.scrollTo(0,0);
+    }
+
+    /* ============ LEVELS & LESSONS ============ */
+    function isLevelUnlocked(idx){
+      if(idx===0) return true;
+      const prev = LEVELS[idx-1];
+      return prev.lessons.every(l=>progress[l.id] && progress[l.id].done);
+    }
+    function levelPct(lv){
+      const done = lv.lessons.filter(l=>progress[l.id]&&progress[l.id].done).length;
+      return Math.round(done/lv.lessons.length*100);
+    }
+    function renderLevels(){
+      const el=document.getElementById('levels-list'); el.innerHTML='';
+      LEVELS.forEach((lv,i)=>{
+        const unlocked=isLevelUnlocked(i), pct=levelPct(lv);
+        const c=document.createElement('div'); c.className='card'+(unlocked?'':' lock'); c.style.setProperty('--c',lv.color);
+        c.innerHTML=`<span class="badge" style="--c:${lv.color}">${lv.name} • ${lv.urdu}</span>
+          <h3>${lv.desc}</h3><p class="urdu" style="color:var(--text-muted)">${lv.udesc}</p>
+          <div class="progress-wrap" style="margin:12px 0"><div class="progress-bar" style="width:${pct}%">${pct}%</div></div>
+          ${unlocked?`<button class="btn" style="--c:${lv.color}" onclick="openLesson('${lv.id}','${lv.lessons[0].id}')">📖 Open Lessons</button>`
+                    :'<p style="color:var(--text-muted)">🔒 Complete the previous level to unlock. <span class="urdu">پچھلا لیول مکمل کریں۔</span></p>'}`;
+        el.appendChild(c);
+      });
+    }
+    function openLesson(lvId, lId){
+      const lv=LEVELS.find(l=>l.id===lvId); const les=lv.lessons.find(l=>l.id===lId);
+      currentLesson={lv,les};
+      const done = progress[lId] && progress[lId].done;
+      const html=[];
+      html.push(`<div class="card" style="--c:${lv.color}">
+        <span class="badge" style="--c:${lv.color}">${lv.name} — Lesson ${lv.lessons.indexOf(les)+1} of ${lv.lessons.length}</span>
+        <h2>${les.title}</h2>`);
+      les.points.forEach(p=>html.push(`<div class="example-box"><p>📌 ${p.en}</p><p class="urdu" style="color:#86efac">${p.ur}</p></div>`));
+      html.push(`<h3 style="margin-top:16px">✏️ Examples / مثالیں</h3>`);
+      les.examples.forEach(e=>html.push(`<div class="example-box"><p class="arabic">${e.ar}</p><p>${e.en}</p><p class="urdu" style="color:#86efac">${e.ur}</p></div>`));
+      html.push(`<div class="quran-box"><h3>📖 From the Quran / قرآن سے</h3>
+        <p class="arabic">${les.quran.ar}</p>
+        <p><b>${les.quran.ref}</b></p><p>${les.quran.en}</p>
+        <p class="urdu" style="color:#93c5fd">${les.quran.ur}</p></div>`);
+      
+      // Add Hadith box if available (for relevant lessons)
+      if(les.hadith){
+        html.push(`<div class="hadith-box"><h3>📜 From Sahih Hadith / صحیح حدیث سے</h3>
+          <p class="arabic-sm">${les.hadith.ar}</p>
+          <p><b>${les.hadith.ref}</b></p><p>${les.hadith.en}</p>
+          <p class="urdu" style="color:#fcd34d">${les.hadith.ur}</p></div>`);
+      }
+      
+      html.push(`<h3 style="margin-top:16px">📺 Lesson Videos (pick your favourite channel)</h3><div class="video-list">`);
+      les.video.forEach(v=>html.push(`<a href="${v.url}" target="_blank">▶ ${v.ch} <span style="font-weight:normal;color:var(--text-muted)">— ${v.note}</span></a>`));
+      html.push(`</div>`);
+      html.push(`<div class="hw-box"><h3>🏠 Homework <span class="urdu">— گھر کا کام</span></h3><p>${les.hw}</p></div>`);
+      html.push(`<h3 style="margin-top:16px">Lessons in this level:</h3>`);
+      lv.lessons.forEach(l=>{
+        const d = progress[l.id]&&progress[l.id].done;
+        html.push(`<button class="btn ${l.id===lId?'':'ghost'}" style="--c:${lv.color};padding:10px 18px;font-size:13px" onclick="openLesson('${lvId}','${l.id}')">${d?'✅':'▶'} ${l.title.split('—')[0]}</button>`);
+      });
+      html.push(`<hr style="margin:18px 0;border:none;border-top:1px solid rgba(255,255,255,0.1)">
+        <button class="btn" style="--c:${lv.color}" onclick="startQuiz('${lId}')">📝 Take the Quiz ${done?'(Retake)':''} — کوئز دیں</button>
+        ${done?'<span style="color:#22c55e;font-weight:bold;margin-left:12px">✅ Completed</span>':''}</div>`);
+      document.getElementById('lesson-content').innerHTML=html.join('');
+      go('lesson');
+    }
+
+    /* ============ QUIZ ============ */
+    let quiz=null;
+    function startQuiz(lId){
+      quiz={lId, q:QUIZ_BANK[lId], answered:false};
+      const q=quiz.q;
+      const opts=q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answer(${i})">${i+1}. ${o}</button>`).join('');
+      document.getElementById('quiz-content').innerHTML=`
+        <div class="card" style="--c:#ff5722">
+          <p><b>Q:</b> ${q.q}</p>
+          <p class="urdu" style="color:var(--text-muted);margin:6px 0 16px">${q.uq}</p>
+          <div id="opts">${opts}</div>
+          <div id="quiz-result"></div>
+        </div>`;
+      go('quiz');
+    }
+    function answer(i){
+      if(quiz.answered) return; quiz.answered=true;
+      const opts=document.querySelectorAll('#opts .quiz-opt');
+      opts.forEach(o=>o.style.pointerEvents='none');
+      const correct = quiz.q.a;
+      if(i===correct){
+        opts[i].classList.add('correct');
+        document.getElementById('quiz-result').innerHTML=`
+          <p style="color:#22c55e;font-weight:bold;margin-top:16px">✅ Correct! Sahih hai! <span class="urdu">بالکل درست!</span></p>
+          <p>Lesson marked complete. <span class="urdu">سبق مکمل ہو گیا۔</span></p>
+          <button class="btn" style="--c:#ff5722" onclick="completeLesson()">Continue ➤</button>`;
+        if(!progress[quiz.lId]) progress[quiz.lId]={};
+        progress[quiz.lId].done=true; saveProg();
+      } else {
+        opts[i].classList.add('wrong');
+        opts[correct].classList.add('correct');
+        document.getElementById('quiz-result').innerHTML=`
+          <p style="color:#ef4444;font-weight:bold;margin-top:16px">❌ Not quite. <span class="urdu">غلط — دوبارہ کوشش کریں!</span></p>
+          <button class="btn" style="--c:#ff5722" onclick="startQuiz('${quiz.lId}')">🔄 Try Again</button>`;
+      }
+    }
+    function completeLesson(){
+      if(currentLesson){
+        const idx=currentLesson.lv.lessons.indexOf(currentLesson.les);
+        const next=currentLesson.lv.lessons[idx+1];
+        if(next){ openLesson(currentLesson.lv.id, next.id); }
+        else { go('levels'); }
+      } else go('levels');
+    }
+
+    /* ============ PROGRESS ============ */
+    function renderProgress(){
+      let totalDone=0, totalLessons=0;
+      const stats=[];
+      LEVELS.forEach(lv=>{
+        const done=lv.lessons.filter(l=>progress[l.id]&&progress[l.id].done).length;
+        totalDone+=done; totalLessons+=lv.lessons.length;
+        stats.push(`<div class="stat" style="background:${lv.color}">${lv.name}<br><b style="font-size:24px">${done}/${lv.lessons.length}</b><br><small class="urdu">${lv.urdu}</small></div>`);
+      });
+      const pct=Math.round(totalDone/totalLessons*100);
+      document.getElementById('overall-bar').style.width=pct+'%';
+      document.getElementById('overall-bar').textContent=pct+'%';
+      document.getElementById('overall-label').innerHTML=`Overall Completion — ${totalDone}/${totalLessons} lessons <span class="urdu" style="font-size:14px">(${pct}٪ مکمل)</span>`;
+      document.getElementById('progress-stats').innerHTML=stats.join('');
+      const ach=[];
+      if(totalDone>=1) ach.push(['🌱','First Steps — پہلا سبق مکمل!']);
+      if(totalDone>=3) ach.push(['📗','Bookworm — 3 lessons done']);
+      if(totalDone>=6) ach.push(['🔥','On Fire — 6 lessons done']);
+      if(totalDone>=9) ach.push(['🌟','Rising Star — 9 lessons done']);
+      if(totalDone>=12) ach.push(['🏆','MASTERY ACHIEVED — مبارک ہو!']);
+      document.getElementById('achievements').innerHTML = ach.length
+        ? ach.map(a=>`<p style="padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.1)"><b>${a[0]} ${a[1]}</b></p>`).join('')
+        : '<p style="color:var(--text-muted)">Complete your first lesson to earn badges! <span class="urdu">پہلا سبق مکمل کریں۔</span></p>';
+    }
+    function resetProgress(){
+      if(confirm('Reset all progress? / کیا تمام پیش رفت مٹا دیں؟')){
+        progress={}; saveProg(); renderProgress();
+      }
+    }
+
+    /* ============ AI TUTOR ============ */
+    const KNOWLEDGE = [
+     {keys:['بسم','bism','bismillah','بِسْمِ'], ans:`<b>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</b> — "In the name of Allah, the Most Merciful, the Most Kind."
+       <br>• بِ = Harf-e-Jarr → بِسْمِ (majrur, kasra)
+       <br>• اللهِ — even Allah's name takes kasra after بِ!
+       <br><span class="urdu">معنی: اللہ کے نام سے جو نہایت مہربان رحم والا ہے۔ بِ حرفِ جار کی وجہ سے اسم اور اللہ مجرور (زیر) ہوئے۔</span>`},
+     {keys:['إن','inna','انّ','anna','آن'], ans:`<b>إِنَّ (Inna)</b> = "Indeed/Verily" — adds emphasis and makes the following noun <b>mansub (ـَ)</b>.
+       <br>• إِنَّ اللهَ مَعَ الصَّابِرِينَ (Al-Baqarah 2:153) — note اللهَ with Fatha!
+       <br>• Related: آنَّ (in reported speech), لكنَّ ("but").
+       <br><span class="urdu">إنَّ زور دیتا ہے اور بعد کے اسم کو منصوب کر دیتا ہے۔ قرآن کی آیت 2:153 دیکھیں۔</span>`},
+     {keys:['harf','jarr','حرف','حروف','particle'], ans:`<b>Harf-e-Jarr (حروف جار)</b> are prepositions like بِ، لِ، مِنْ، فِي، عَلَى، إِلَى، عَنْ. The word AFTER them always becomes <b>majrur (ـِ)</b>.
+       <br>• Example: فِي الْبَيْتِ (in the house — البيتِ has kasra)
+       <br>• Quranic: بِسْمِ اللهِ (Al-Fatiha 1:1)
+       <br><span class="urdu">حروفِ جار کے بعد آنے والا لفظ ہمیشہ مجرور ہوتا ہے۔ بِ، لِ، مِنْ، في، علي سب اسی قاعدے پر چلتے ہیں۔</span>`},
+     {keys:['sun','moon','letters','شمس','قمر'], ans:`<b>Sun letters (حروف شمسيّة)</b>: ت ث د ذ ر ز س ش ص ض ط ظ ل ن — the لّ of الّ assimilates in pronunciation: الشّمس = ash-shams.
+       <br><b>Moon letters (حروف قمريّة)</b>: the rest — the لّ stays: القمر = al-qamar.
+       <br>Memory tip: "Sun melts the L" ☀️
+       <br><span class="urdu">حروفِ شمس میں لام الّ مل جاتی ہے (اششمس) اور حروفِ قمر میں الگ رہتی ہے (القمر)۔</span>`},
+     {keys:['fatiha','الحمد','hamd','alhamd'], ans:`<b>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</b> (Al-Fatiha 1:2)
+       <br>• الْحَمْدُ = mubtada (marfu)
+       <br>• لِلَّهِ = lillahi, lam + Allah with kasra → "for Allah" (khabar)
+       <br>• رَبِّ = "Lord of" — mudaf, مجرور
+       <br><span class="urdu">تمام تعریف اللہ کے لیے ہے جو تمام جہانوں کا پروردگار ہے۔ ہر لفظ کا اعراب نوٹ کریں۔</span>`},
+     {keys:['madi','ماضی','past'], ans:`<b>Fi'l-e-Madi (فعل ماضي)</b> = past tense. Pattern: Fatha on middle letter — كَتَبَ، ذَهَبَ، قَالَ.
+       <br>• Attach pronouns: كَتَبْتُ (I wrote), كَتَبْنَا (we wrote)
+       <br><span class="urdu">فعلِ ماضی مکمل کام بتاتا ہے۔ درمیان والے حرف پر زبر ہوتی ہے۔</span>`},
+     {keys:['mudari','مضارع','present'], ans:`<b>Fi'l-e-Mudari (فعل مضارع)</b> = present tense. Starts with ي، ت، ن or أ — يَكْتُبُ (he writes), أَكْتُبُ (I write).
+       <br><span class="urdu">فعلِ مضارع جاری کام بتاتا ہے اور ي، ت، ن، أ سے شروع ہوتا ہے۔</span>`},
+     {keys:['salam','greeting','سلام','salam'], ans:`Greetings: <b>السَّلَامُ عَلَيْكُمْ</b> (Peace be upon you) → reply: <b>وَعَلَيْكُمُ السَّلَامُ</b>.
+       <br>Also: صَبَاحُ الْخَيْرِ (good morning), مَسَاءُ الْخَيْرِ (good evening).
+       <br><span class="urdu">السلام عليکم — آپ پر سلامتی ہو۔ جواب: وعليکم السلام۔</span>`},
+     {keys:['homework','hw','ورک','کام'], ans:`Each lesson has homework in the orange box 🏠. Typical tasks: write letters/words 3–10 times, memorize Quranic phrases, label i'raab in 5 verses, make sentences. Progress is saved when you pass the quiz!
+       <br><span class="urdu">ہر سبق کے آخر میں نارنجی خانے میں ہوم ورک ہے۔ کوئز پاس کریں تو سبق مکمل شمار ہوتا ہے۔</span>`},
+     {keys:['dua','prayer','دعا','duas'], ans:`<b>🤲 Powerful Duas for Knowledge:</b>
+       <br>1. <b>رَبِّ زِدْنِي عِلْمًا</b> (Surah Taha 20:114) — "My Lord, increase me in knowledge."
+       <br>2. <b>اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا</b> (Ibn Majah 3843) — "O Allah, I ask You for beneficial knowledge."
+       <br>3. <b>رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ</b> (Surah An-Naml 27:19) — "Enable me to be grateful for Your favors."
+       <br>4. <b>اللَّهُمَّ سَهِّلْ لَنَا تَعَلُّمَ الْعَرَبِيَّةِ</b> — "O Allah, make learning Arabic easy for us."
+       <br><span class="urdu">علم کی دعاوں کو روزانہ پڑھیں اور اللہ سے pomoc مانگیں۔</span>`},
+    ];
+    function aiAnswer(q){
+      const ql=q.toLowerCase();
+      for(const k of KNOWLEDGE){ if(k.keys.some(key=>ql.includes(key.toLowerCase()))) return k.ans; }
+      return `Great question! Here is how to think about it:<br>
+      • Check the lesson pages for the rule (اس کی قاعدہ لیسن پیجز میں دیکھیں)<br>
+      • Grammar terms to explore: Ism/Fi'l/Harf, I'raab, Harf-e-Jarr, Inna<br>
+      • Try asking with an Arabic word like "بسم" or a topic like "harf jarr".<br>
+      <span class="urdu">اچھا سوال! براہ کرما عربی لفظ یا موضوع کے ساتھ پوچھیں — جیسے "بسم" یا "حرف جار"۔</span>`;
+    }
+    function quickAsk(q){ document.getElementById('chat-in').value=q; sendMsg(); }
+    function sendMsg(){
+      const inp=document.getElementById('chat-in'); const q=inp.value.trim(); if(!q) return;
+      inp.value='';
+      const log=document.getElementById('chat-log');
+      log.innerHTML+=`<div class="msg user">${q}</div>`;
+      setTimeout(()=>{
+        log.innerHTML+=`<div class="msg bot">${aiAnswer(q)}</div>`;
+        log.scrollTop=log.scrollHeight;
+      },400);
+      log.scrollTop=log.scrollHeight;
+    }
+
+    /* init */
+    go('home');
+  </script>
+</body>
+</html>
